@@ -1,0 +1,141 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+body {
+    background: #285D92;
+    color: white;
+    text-align: center;
+    font-family: muli, avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+}
+
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    color: black;
+    text-align: center;
+}
+
+.footer a {
+    color: black;
+    text-decoration: underline;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.ljust {
+    text-align: left;
+    /* padding-left: 20%; */
+}
+
+.ljust p {
+    padding-left: 20%;
+}
+
+img {
+    margin: auto;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.logo {
+    width: 60%;
+    max-width: 600px;
+    margin: auto;
+    display: block;
+    padding-top: 10%;
+    padding-bottom: 4%;
+}
+
+.tagline {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 1.6em;
+}
+
+.partner-nasa {
+    width: 80%;
+    margin: auto;
+    display: block;
+    max-width: 245px;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.partner-army {
+    width: 65%;
+    margin: auto;
+    display: block;
+    max-width: 200px;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.maincontent {
+    clear: both;
+    width: 80%;
+    font-size: 1.2em;
+    max-width: 92.3em;
+    margin: 0 auto;
+    padding: 1em 0px;
+    /* color: #333; */
+    /* line-height: 1.7em; */
+    position: relative;
+}
+
+.cryptedmail:after {
+    content: attr(data-name) "@" attr(data-domain) "." attr(data-tld); 
+}
+
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+
+/*  GRID OF TWO  */
+.span_2_of_2 {
+	width: 100%;
+}
+.span_1_of_2 {
+	width: 49.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.col { 
+		margin: 1% 0 1% 0%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.span_2_of_2, .span_1_of_2 { width: 100%; }
+}
