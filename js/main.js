@@ -15,12 +15,12 @@ class CommonHeader extends HTMLElement {
         `
         if (thispage == 'home') {
             headerText += `
-            <a class="navbar-brand" href="index.html"><img alt="logo" src="img/kmb_logo_large.png"
+            <a class="navbar-brand" href="/index.html"><img alt="logo" src="/img/kmb_logo_large.png"
                                 style="height:400%"></a>
             `
         } else {
             headerText += `
-            <a class="navbar-brand" href="index.html"><img src="img/kmb_logo.svg" alt="logo"
+            <a class="navbar-brand" href="/index.html"><img src="/img/kmb_logo.svg" alt="logo"
 								style="height:200%"></a>
             `
         }
@@ -30,58 +30,58 @@ class CommonHeader extends HTMLElement {
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
         `
-        if  (thispage == 'home') {
+        if (thispage == 'home') {
             headerText += `
-                            <li class="active"><a href="index.html">Home</a></li>
+                            <li class="active"><a href="/index.html">Home</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/index.html">Home</a></li>
             `
         }
-        if  (thispage == 'technology') {
+        if (thispage == 'technology') {
             headerText += `
-                            <li class="active"><a href="technology.html">Technology</a></li>
+                            <li class="active"><a href="/technology.html">Technology</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="technology.html">Technology</a></li>
+                            <li><a href="/technology.html">Technology</a></li>
             `
         }
-        if  (thispage == 'applications') {
+        if (thispage == 'applications') {
             headerText += `
-                            <li class="active"><a href="applications.html">Applications</a></li>
+                            <li class="active"><a href="/applications.html">Applications</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="applications.html">Applications</a></li>
+                            <li><a href="/applications.html">Applications</a></li>
             `
         }
-        if  (thispage == 'products') {
+        if (thispage == 'products') {
             headerText += `
-                            <li class="active"><a href="products.html">Products</a></li>
+                            <li class="active"><a href="/products.html">Products</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="products.html">Products</a></li>
+                            <li><a href="/products.html">Products</a></li>
             `
         }
-        if  (thispage == 'resources') {
+        if (thispage == 'resources') {
             headerText += `
-                            <li class="active"><a href="resources.html">Resources</a></li>
+                            <li class="active"><a href="/resources.html">Resources</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="resources.html">Resources</a></li>
+                            <li><a href="/resources.html">Resources</a></li>
             `
         }
-        if  (thispage == 'contact') {
+        if (thispage == 'contact') {
             headerText += `
-                            <li class="active"><a href="contact.html">Contact</a></li>
+                            <li class="active"><a href="/contact.html">Contact</a></li>
             `
         } else {
             headerText += `
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/contact.html">Contact</a></li>
             `
         }
         headerText += `
@@ -161,7 +161,7 @@ class CommonFooter extends HTMLElement {
                             </div>
                         </div>
                         <div class="subscribe-form">
-                            <form method="post" action="php/subscribe.php" id="subscribe-form" class="subscribe">
+                            <form method="post" action="/php/subscribe.php" id="subscribe-form" class="subscribe">
                                 <div class="form-group has-feedback">
                                     <input type="email" class="form-control" name="subemail" placeholder="Your email">
                                 </div>
@@ -177,8 +177,8 @@ class CommonFooter extends HTMLElement {
                         <div class="col-lg-6">
                             <div class="copyright">
                                 <p>
-                                    <span>&copy; KMB Telematics Inc. 2023 All rights reserved. </span><a href=""
-                                        Swifty="_blank">Terms of Use</a>. <a href="" Swifty="_blank">Privacy Policy</a>.
+                                    <span>&copy; KMB Telematics Inc. 2023 All rights reserved. </span><a href="#"
+                                        Swifty="_blank">Terms of Use</a>. <a href="#" Swifty="_blank">Privacy Policy</a>.
                                 </p>
                                 </p>
                             </div>
