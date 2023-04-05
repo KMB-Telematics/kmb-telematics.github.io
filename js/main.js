@@ -199,3 +199,9 @@ class CommonFooter extends HTMLElement {
     }
 }
 customElements.define('common-footer', CommonFooter )
+
+// $(document).ready(function () {
+//     $("#download-daa").click(function () {
+//         $("#popupModalDAA").modal("hide");
+//     });
+// });

@@ -154,22 +154,22 @@ async function submitDownloadForm(e, form) {
         returnError = true;
     } else email.classList.remove('error');
     
-    if (company.value=='') {
-        company.classList.add('error');
-        returnError = true;
-    } else company.classList.remove('error');
+    // if (company.value=='') {
+    //     company.classList.add('error');
+    //     returnError = true;
+    // } else company.classList.remove('error');
 
-    if (jobTitle.value=='') {
-        jobTitle.classList.add('error');
-        returnError = true;
-    } else jobTitle.classList.remove('error');
+    // if (jobTitle.value=='') {
+    //     jobTitle.classList.add('error');
+    //     returnError = true;
+    // } else jobTitle.classList.remove('error');
 
-    if (phone.value=='') {
-        phone.classList.add('error');
-        returnError = true;
-    } else phone.classList.remove('error');
+    // if (phone.value=='') {
+    //     phone.classList.add('error');
+    //     returnError = true;
+    // } else phone.classList.remove('error');
 
-    if(!regex_phone.test(phone.value)){
+    if(phone.value != '' && !regex_phone.test(phone.value)){
         phone.classList.add('error');
         returnError = true;
     } else phone.classList.remove('error');
@@ -192,12 +192,13 @@ async function submitDownloadForm(e, form) {
         // 2.4 Request & Response
         const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/download`, headers, jsonFormData); // Uses JSON Placeholder
         if (response == 'OK'){
-            var downloadElement = document.getElementById('brochure-daa');
+            var downloadElement = document.getElementById('download');
             var filename = downloadElement.href.replace(/^.*[\\\/]/, '')
             filename = filename.replace(/%20/g, ' ')
             downloadElement.download = filename;
             downloadElement.click();
-            document.getElementById('brochure-daa').style.display = 'none';
+            document.getElementById('download').style.display = 'none';
+            $("#popupModal").modal("hide");
         }
     }
     catch (err) {
