@@ -38,42 +38,41 @@
         <section id="content">
             <div class="container">
                 <!-- Button trigger modal -->
-                <a href="#" target="_blank" data-toggle="modal"
-                    data-target="#exampleModal">Download Brochure</a>
+                <a href="#" data-toggle="modal" data-target="#popupModal">Download Brochure</a>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <div class="column" id="main">
                                     <h1>Download Brochure </h1>
-                                    <h3>Please fill in the details below to download the requested brochure:</h3>
-                                    <form method="post" action="/php/download.php" id="download-form" class="download">
+                                    <h2>Please fill in the details below to download the requested brochure:</h2>
+                                    <form id="download-form" class="download">
                                         <div class="form-group has-feedback">
-                                            <label for="name">Your Name*</label>
-                                            <input type="text" class="form-control" required="" placeholder="">
+                                            <label for="name">Name*</label>
+                                            <input type="text" class="form-control" name="name" placeholder="">
                                         </div>
                                         <div class="form-group has-feedback">
-                                            <label for="email">E-mail address*</label>
-                                            <input type="email" class="form-control" aria-describedby="emailHelp"
-                                                placeholder="">
+                                            <label for="email">E-mail*</label>
+                                            <input type="email" class="form-control" name="email" placeholder="">
                                         </div>
                                         <div class="form-group has-feedback">
-                                            <label for="company">Company</label>
-                                            <input type="company" class="form-control" placeholder="">
+                                            <label for="company">Company*</label>
+                                            <input type="company" class="form-control" name="company" placeholder="">
                                         </div>
                                         <div class="form-group has-feedback">
-                                            <label for="jobtitle">Job Title</label>
-                                            <input type="jobTItle" class="form-control" placeholder="">
+                                            <label for="jobtitle">Job Title*</label>
+                                            <input type="jobTItle" class="form-control" name="jobtitle" placeholder="">
                                         </div>
                                         <div class="form-group has-feedback">
-                                            <label for="phone">Phone</label>
-                                            <input type="text" class="form-control" placeholder="">
+                                            <label for="phone">Phone*</label>
+                                            <input type="text" class="form-control" name="phone" placeholder="">
                                         </div>
-                                        <input type="submit" value="Download" id="download-submit" class="submit btn btn-default">
+                                        <input type="submit" value="Download" id="download-submit"
+                                            class="submit btn btn-default">
                                     </form>
+                                    <a href="/pdf/KMB Software Defined Radar, Airborne DAA.pdf" style="display: none;" target="_blank" id="brochure-daa">Hidden Download Link</a>
                                 </div>
                             </div>
                         </div>
