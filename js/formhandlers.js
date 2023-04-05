@@ -5,7 +5,7 @@ const fetchService = new FetchService();
 /*-- /Objects --*/
 
 /*--Functions--*/
-async function submitForm(e, form) {
+async function submitContactForm(e, form) {
     // 1. Prevent reloading page
     e.preventDefault();
 
@@ -69,6 +69,55 @@ async function submitForm(e, form) {
     } 
 }
 
+async function submitSubscribeForm(e, form) {
+    // 1. Prevent reloading page
+    e.preventDefault();
+
+    // 2. Validate the form
+    var email = document.getElementById('subscribe-form').email;
+    var regx = /^([a-z0-9_\-\.])+\@([a-z0-9_\-\.])+\.([a-z]{2,4})$/i;
+    var returnError = false;
+    
+    //Simple validation to make sure user entered something
+    //If error found, add hightlight class to the text field
+    if (email.value=='') {
+        email.classList.add('error');
+        returnError = true;
+    } else email.classList.remove('error');	
+    
+    if(!regx.test(email.value)){
+        email.classList.add('error');
+        returnError = true;
+    } else email.classList.remove('error');
+    
+    // Highlight all error fields, then quit.
+    if(returnError == true){
+        return false;	
+    }
+
+    try {
+        // 2. Submit the form
+        // 2.1 User Interaction
+        const btnSubmit = document.getElementById('subscribe-submit');
+        btnSubmit.disabled = true;
+        setTimeout(() => btnSubmit.disabled = false, 2000);
+        // 2.2 Build JSON body
+        const jsonFormData = buildJsonFormData(form);
+        // 2.3 Build Headers
+        const headers = buildHeaders();
+        // 2.4 Request & Response
+        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/subscribe`, headers, jsonFormData); // Uses JSON Placeholder
+        if (response == 'OK'){
+            document.getElementById('subscribe-done').style.display = 'block';
+            document.getElementById('subscribe-form').email.value = '';
+        }
+    }
+    catch (err) {
+        console.error(`Error at submission: ${err}`);
+        alert(`Sorry, unexpected error. Please try again later.`);
+    } 
+}
+
 function buildHeaders() {
     const headers = {
         "Content-Type": "application/json",
@@ -78,8 +127,15 @@ function buildHeaders() {
 
 function buildJsonFormData(form) {
     const jsonFormData = {};
+    var colKey = ''
     for (const pair of new FormData(form)) {
-        jsonFormData['From Web: ' + pair[0]] = pair[1];
+        if (pair[0] == 'name')
+			colKey = 'From Web: Name';
+		else if (pair[0] == 'email')
+			colKey = 'From Web: Email';
+		else if (pair[0] == 'message')
+			colKey = 'From Web: Message';
+        jsonFormData[colKey] = pair[1];
     }
     return jsonFormData;
 }
@@ -89,7 +145,14 @@ function buildJsonFormData(form) {
 const contactForm = document.querySelector("#contact-form");
 if (contactForm) {
     contactForm.addEventListener("submit", function (e) {
-        submitForm(e, this);
+        submitContactForm(e, this);
+    });
+}
+
+const subscribeForm = document.querySelector("#subscribe-form");
+if (subscribeForm) {
+    subscribeForm.addEventListener("submit", function (e) {
+        submitSubscribeForm(e, this);
     });
 }
 /*--/Event Listeners--*/
