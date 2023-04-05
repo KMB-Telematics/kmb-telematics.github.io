@@ -38,11 +38,10 @@
         <section id="content">
             <div class="container">
                 <!-- Button trigger modal -->
+                <a href="#" data-toggle="modal" data-target="#popupModal-daa">Download Brochure DAA</a>
                 <div id="brochure-daa">
-                    <a href="#" data-toggle="modal" data-target="#popupModal">Download Brochure DAA</a>
-
                     <!-- Modal -->
-                    <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+                    <div class="modal fade" id="popupModal-daa" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -52,7 +51,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="column" id="main">
-                                        <form id="download-form" class="download">
+                                        <form id="download-form-daa" class="download-form">
                                             <div class="form-group has-feedback">
                                                 <label for="name">Name*</label>
                                                 <input type="text" class="form-control" name="name" placeholder="">
@@ -75,27 +74,28 @@
                                                 <label for="phone">Phone</label>
                                                 <input type="text" class="form-control" name="phone" placeholder="">
                                             </div>
-                                            <input type="submit" value="Download" id="download-submit"
+                                            <input type="submit" name="submit" value="Download"
                                                 class="submit btn btn-default">
+                                            <!-- Fake Link -->
+                                            <button type="button" name="hidden-button" hidden
+                                                onclick="window.open('/pdf/KMB Software Defined Radar, Airborne DAA.pdf', '_blank')">Hidden
+                                                Download Link DAA</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Fake Link -->
-                    <a href="/pdf/KMB Software Defined Radar, Airborne DAA.pdf" style="display: none;" target="_blank"
-                        id="download">Hidden Download Link</a>
                 </div>
 
 
+                <br>
 
+                <!-- Button trigger modal -->
+                <a href="#" data-toggle="modal" data-target="#popupModal-cuas">Download Brochure cUAS</a>
                 <div id="brochure-cuas">
-                    <a href="#" data-toggle="modal" data-target="#popupModal">Download Brochure cUAS</a>
-
                     <!-- Modal -->
-                    <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+                    <div class="modal fade" id="popupModal-cuas" tabindex="-1" role="dialog">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -105,7 +105,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="column" id="main">
-                                        <form id="download-form" class="download">
+                                        <form id="download-form-cuas" class="download-form">
                                             <div class="form-group has-feedback">
                                                 <label for="name">Name*</label>
                                                 <input type="text" class="form-control" name="name" placeholder="">
@@ -128,18 +128,18 @@
                                                 <label for="phone">Phone</label>
                                                 <input type="text" class="form-control" name="phone" placeholder="">
                                             </div>
-                                            <input type="submit" value="Download" id="download-submit"
+                                            <input type="submit" name="submit" value="Download"
                                                 class="submit btn btn-default">
+                                            <!-- Fake Link -->
+                                            <button type="button" name="hidden-button" hidden
+                                                onclick="window.open('/pdf/KMB Software Defined Radar, cUAS.pdf', '_blank')">Hidden
+                                                Download Link cUAS</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Fake Link -->
-                    <a href="/pdf/KMB Software Defined Radar, cUAS.pdf" style="display: none;" target="_blank"
-                        id="download">Hidden Download Link</a>
                 </div>
 
             </div>

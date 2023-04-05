@@ -793,7 +793,7 @@ textarea.error {
 }
 
 /*-------Download---------*/
-.download input {
+.download-form input {
     background: #fff;
     border: solid 1px #ddd;
     color: #000;
@@ -803,11 +803,11 @@ textarea.error {
     outline: none;
 }
 
-.download.noMarr input {
+.download-form.noMarr input {
     margin-right: 0px;
 }
 
-.download .submit {
+.download-form .submit {
     background: #285D92;
     color: #fff;
     font-size: 16px;
@@ -819,7 +819,7 @@ textarea.error {
     float: left;
 }
 
-.download .submit:hover {
+.download-form .submit:hover {
     background: #6FB4F0;
 }
 
