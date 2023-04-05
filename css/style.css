@@ -1769,7 +1769,8 @@ article .align-right {
 }
 
 .partner-nasa {
-    height: 80%;
+    /* height: 80%; */
+    height: auto;
     margin: auto;
     display: block;
     max-width: 245px;
@@ -1778,7 +1779,8 @@ article .align-right {
 }
 
 .partner-army {
-    height: 65%;
+    /* height: 65%; */
+    height: auto;
     margin: auto;
     display: block;
     max-width: 200px;
