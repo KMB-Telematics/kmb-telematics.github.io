@@ -39,14 +39,14 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
-						<div class="done">
+						<div id="contact-done">
 							<div class="alert alert-success">
 								<button type="button" class="close" data-dismiss="alert">×</button>
 								Your message has been sent. Thank you!
 							</div>
 						</div>
-						<div class="contact-form">
-							<form method="post" action="/php/contact.php" id="contact-form" class="contact">
+						<div class="contacts">
+							<form id="contact-form" class="contact" name="contactform">
 								<div class="form-group has-feedback">
 									<label for="name">Name*</label>
 									<input type="text" class="form-control" name="name" placeholder="">
@@ -59,7 +59,7 @@
 								</div>
 								<div class="form-group has-feedback">
 									<label for="message">Message*</label>
-									<textarea class="form-control" rows="6" name="comment" placeholder=""></textarea>
+									<textarea class="form-control" rows="6" name="message" placeholder=""></textarea>
 									<i class="fa fa-pencil form-control-feedback"></i>
 								</div>
 								<input type="submit" value="Submit" id="contact-submit" class="submit btn btn-default">
@@ -95,10 +95,10 @@
 	<script src="/js/portfolio/setting.js"></script>
 	<script src="/js/jquery.flexslider.js"></script>
 	<script src="/js/animate.js"></script>
-	<script src="/js/contact.js"></script>
 	<script src="/js/custom.js"></script>
 	<script src="/js/subscribe.js"></script>
 	<script type=module src="/js/main.js"></script>
+	<script type=module src="/js/contactform.js"></script>
 </body>
 
 </html>

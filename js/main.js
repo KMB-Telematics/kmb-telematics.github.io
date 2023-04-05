@@ -154,10 +154,10 @@ class CommonFooter extends HTMLElement {
                     </div>
                     <div class="col-lg-3">
                         <strong>Subscribe to our newsletter</strong><br>
-                        <div class="done">
+                        <div id="sub-done">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                Your message has been sent. Thank you!
+                                You have been successfully subscribed. Thank you!
                             </div>
                         </div>
                         <div class="subscribe-form">
