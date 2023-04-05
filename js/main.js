@@ -154,16 +154,16 @@ class CommonFooter extends HTMLElement {
                     </div>
                     <div class="col-lg-3">
                         <strong>Subscribe to our newsletter</strong><br>
-                        <div class="done">
+                        <div id="subscribe-done" style="display: none">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                Your message has been sent. Thank you!
+                                You have been successfully subscribed. Thank you!
                             </div>
                         </div>
-                        <div class="subscribe-form">
-                            <form method="post" action="/php/subscribe.php" id="subscribe-form" class="subscribe">
+                        <div class="subscribes">
+                            <form id="subscribe-form" class="subscribe">
                                 <div class="form-group has-feedback">
-                                    <input type="email" class="form-control" name="subemail" placeholder="Your email">
+                                    <input type="email" class="form-control" name="email" placeholder="Your email">
                                 </div>
                                 <input type="submit" value="Subscribe" id="subscribe-submit" class="submit btn btn-default">
                             </form>
@@ -199,3 +199,9 @@ class CommonFooter extends HTMLElement {
     }
 }
 customElements.define('common-footer', CommonFooter )
+
+// $(document).ready(function () {
+//     $("#download-daa").click(function () {
+//         $("#popupModalDAA").modal("hide");
+//     });
+// });
