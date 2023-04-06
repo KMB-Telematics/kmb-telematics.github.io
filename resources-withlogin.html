@@ -27,42 +27,24 @@
 <body>
 	<div id="wrapper">
 		<!-- header -->
-		<common-header thispage="applications"></common-header>
+		<common-header thispage="resources"></common-header>
 		<!-- end header -->
 
 		<!-- inner header -->
-		<inner-header pagename="Terrain Avoidance"></inner-header>
+		<inner-header pagename="Resources"></inner-header>
 		<!-- end inner header -->
 
 		<!-- content -->
 		<section id="content">
 			<div class="container">
-				<div class="row mar-b-50">
-					<div class="col-lg-5">
-						<div><img src="/img/sample-image.png" alt=""></div>
-					</div>
+				<h1>This space is under construction.</h1>
 
-					<div class="col-lg-7 about wow fadeInRight animated" data-wow-animation-name="none">
-						<h3>Article Title</h3>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-							labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-							laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-							voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-							cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						</p>
-						<p>
-							Duis ut diam quam nulla porttitor massa. Vestibulum sed arcu non odio euismod lacinia at
-							quis. Habitant morbi tristique senectus et. Pulvinar etiam non quam lacus suspendisse
-							faucibus. Nec dui nunc mattis enim ut tellus elementum sagittis. Id neque aliquam vestibulum
-							morbi blandit cursus risus at. Etiam erat velit scelerisque in dictum non consectetur a. Hac
-							habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Sit amet
-							cursus sit amet. Tincidunt id aliquet risus feugiat in ante metus dictum.
-						</p>
-						<br />
-						<br />
-					</div>
-				</div>
+				<form id="subscribe-form" class="subscribe">
+					<input type="submit" value="Login" id="login" class="submit btn btn-default">
+				</form>
+
+				<div style="min-height: 150px;"></div>
+
 			</div>
 		</section>
 		<!-- end content -->
@@ -85,8 +67,57 @@
 	<script src="/js/jquery.flexslider.js"></script>
 	<script src="/js/animate.js"></script>
 	<script src="/js/custom.js"></script>
-	<script src="/js/subscribe.js"></script>
 	<script type=module src="/js/main.js"></script>
+	<script type=module src="/js/formhandlers.js"></script>
+	<script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+	<script>
+		auth0.createAuth0Client({
+		domain: "dev-izf74ye7u1kum7ys.us.auth0.com",
+		clientId: "HVz2jWusuxPQFuIJf02OGec5y9mIDPuC",
+		authorizationParams: {
+			redirect_uri: window.location.origin
+		}
+		}).then(async (auth0Client) => {
+		// Assumes a button with id "login" in the DOM
+		const loginButton = document.getElementById("login");
+
+		loginButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			auth0Client.loginWithRedirect();
+		});
+
+		if (location.search.includes("state=") && 
+			(location.search.includes("code=") || 
+			location.search.includes("error="))) {
+			await auth0Client.handleRedirectCallback();
+			window.history.replaceState({}, document.title, "/");
+		}
+
+		// Assumes a button with id "logout" in the DOM
+		const logoutButton = document.getElementById("logout");
+
+		logoutButton.addEventListener("click", (e) => {
+			e.preventDefault();
+			auth0Client.logout();
+		});
+
+		const isAuthenticated = await auth0Client.isAuthenticated();
+		const userProfile = await auth0Client.getUser();
+
+		// Assumes an element with id "profile" in the DOM
+		const profileElement = document.getElementById("profile");
+
+		if (isAuthenticated) {
+			profileElement.style.display = "block";
+			profileElement.innerHTML = `
+					<p>${userProfile.name}</p>
+					<img src="${userProfile.picture}" />
+				`;
+		} else {
+			profileElement.style.display = "none";
+		}
+		});
+	</script>
 </body>
 
 </html>

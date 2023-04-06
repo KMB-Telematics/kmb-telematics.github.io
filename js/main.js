@@ -138,7 +138,7 @@ class CommonFooter extends HTMLElement {
                                 <i class="icon-phone"></i>
                                 <a href="#" class="cryptedphone" data-telarea="703" data-telnumber="783"
                                     data-telext="3377"
-                                    onclick="window.location.href = 'tel:' + this.dataset.telarea + '-' + this.dataset.telnumber + '.' + this.dataset.telext; return false;"></a></a><br>
+                                    onclick="window.location.href = 'tel:' + this.dataset.telarea + '-' + this.dataset.telnumber + '-' + this.dataset.telext; return false;"></a></a><br>
                                 <i class="icon-envelope-alt"></i>
                                 <a href="#" class="cryptedmail" data-emailname="info" data-emaildomain="kmb"
                                     data-emailtld="ac"
