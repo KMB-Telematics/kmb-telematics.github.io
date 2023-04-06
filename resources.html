@@ -3,16 +3,16 @@
 
 <head>
 	<meta charset="utf-8">
-    <title>KMB Telematics</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="KMB Telematics - Digital Imaging Radar" name="description">
-    <meta content="KMB Telematics Inc." name="author">
-    <meta name=”robots” content=”index,follow” />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" href="/img/favicon/favicon.ico">
-    <link rel="manifest" href="/img/favicon/site.webmanifest">
+	<title>KMB Telematics</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="KMB Telematics - Digital Imaging Radar" name="description">
+	<meta content="KMB Telematics Inc." name="author">
+	<meta name=”robots” content=”index,follow” />
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+	<link rel="icon" type="image/png" href="/img/favicon/favicon.ico">
+	<link rel="manifest" href="/img/favicon/site.webmanifest">
 	<!-- css -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet">
@@ -40,11 +40,21 @@
 			<div class="container">
 				<h1>This space is under construction.</h1>
 
-				<form id="subscribe-form" class="subscribe">
-					<input type="submit" value="Login" id="login" class="submit btn btn-default">
-				</form>
+				<div class="col-md-4">
+					<form id="login-form" class="login">
+						<div class="form-group has-feedback">
+							<label for="username">Username</label>
+							<input type="text" class="form-control" name="username" placeholder="">
+						</div>
+						<div class="form-group has-feedback">
+							<label for="password">Password</label>
+							<input type="password" class="form-control" name="password" placeholder="">
+						</div>
+						<input type="submit" value="Login" id="login-submit" class="submit btn btn-default">
+					</form>
+				</div>
 
-				<div style="min-height: 150px;"></div>
+				<div style="min-height: 250px;"></div>
 			</div>
 		</section>
 		<!-- end content -->

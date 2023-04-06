@@ -196,6 +196,45 @@ async function submitDownloadForm(e, form) {
     }
 }
 
+async function submitLoginForm(e, form) {
+    // 1. Prevent reloading page
+    e.preventDefault();
+
+    var returnError = false;
+
+    // 2. Validate the form
+    var uname = form.username;
+    var upass = form.password;
+
+
+    //Simple validation to make sure user entered something
+    //If error found, add hightlight class to the text field
+    if (uname.value == '') {
+        uname.classList.add('error');
+        returnError = true;
+    } else uname.classList.remove('error');
+
+    if (upass.value == '') {
+        upass.classList.add('error');
+        returnError = true;
+    } else upass.classList.remove('error');
+
+    // Highlight all error fields, then quit.
+    if (returnError == true) {
+        return false;
+    }
+
+    try {
+        form.username.value = '';
+        form.password.value = '';
+        alert(`Sorry, unexpected error. Please try again later.`);
+    }
+    catch (err) {
+        console.error(`Error at login: ${err}`);
+        alert(`Sorry, unexpected error. Please try again later.`);
+    }
+}
+
 function buildHeaders() {
     const headers = {
         "Content-Type": "application/json",
@@ -250,5 +289,12 @@ for (let i = 0; i < downloadForms.length; i++) {
             submitDownloadForm(e, this);
         });
     }
+}
+
+const loginForm = document.querySelector("#login-form");
+if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+        submitLoginForm(e, this);
+    });
 }
 /*--/Event Listeners--*/

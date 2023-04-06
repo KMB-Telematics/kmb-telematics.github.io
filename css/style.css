@@ -7,6 +7,10 @@ Note: Licence under Creative Commons Attribution 3.0
 @import url('font-awesome.css');
 @import url('animate.css');
 
+:root {
+    --kmb-color:#285D92;
+}
+
 body {
     font-family: 'Play', sans-serif;
     font-size: 14px;
@@ -283,12 +287,12 @@ header ul.nav li ul li ul {
 .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {
     color: #FFFFFF;
-    background: #285D92;
+    background: var(--kmb-color);
 }
 
 .navbar-default .navbar-nav>li>a:hover,
 .navbar-default .navbar-nav>li>a:focus {
-    color: #285D92;
+    color: var(--kmb-color);
     background-color: transparent;
 }
 
@@ -364,7 +368,7 @@ select.selectmenu {
 }
 
 .flex-caption h1 {
-    color: #285D92;
+    color: var(--kmb-color);
     letter-spacing: 1px;
     margin-bottom: 8px;
     font-size: 40px;
@@ -423,8 +427,8 @@ select.selectmenu {
     display: inline-table;
     border: 1px solid #E5E5E5;
     background: transparent;
-    color: #285D92;
-    border-bottom: 4px solid #285D92;
+    color: var(--kmb-color);
+    border-bottom: 4px solid var(--kmb-color);
     font-style: normal !important;
 }
 
@@ -512,7 +516,7 @@ img.img-center {
 }
 
 section.hero-text {
-    background: #285D92;
+    background: var(--kmb-color);
     padding: 50px 0 50px 0;
     color: #fff;
 }
@@ -583,8 +587,8 @@ section.hero-text h1 {
     display: inline-table;
     border: 1px solid #C8C8C8;
     background: transparent;
-    color: #285D92;
-    border-bottom: 3px solid #285D92;
+    color: var(--kmb-color);
+    border-bottom: 3px solid var(--kmb-color);
 }
 
 .cta-text {
@@ -668,7 +672,7 @@ section.hero-text h1 {
 ==================================== */
 
 #inner-headline {
-    background: #285D92;
+    background: var(--kmb-color);
     position: relative;
     margin: 0;
     padding: 0;
@@ -737,7 +741,7 @@ ul.breadcrumb li a:hover {
 }
 
 .contact .submit {
-    background: #285D92;
+    background: var(--kmb-color);
     color: #fff;
     font-size: 16px;
     font-weight: 400;
@@ -778,7 +782,7 @@ textarea.error {
 }
 
 .subscribe .submit {
-    background: #285D92;
+    background: var(--kmb-color);
     color: #fff;
     font-size: 16px;
     font-weight: 400;
@@ -809,7 +813,7 @@ textarea.error {
 }
 
 .download-form .submit {
-    background: #285D92;
+    background: var(--kmb-color);
     color: #fff;
     font-size: 16px;
     font-weight: 400;
@@ -823,6 +827,19 @@ textarea.error {
 
 .download-form .submit:hover {
     background: #6FB4F0;
+}
+
+/*-------Download---------*/
+.login .submit {
+    background: var(--kmb-color);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0px;
+    border: none !important;
+    border-radius: 0;
+    float: left;
 }
 
 /* --- search form --- */
@@ -963,7 +980,7 @@ ul.portfolio-categ li a {
 }
 
 ul.portfolio-categ li.active {
-    border: 1px solid #285D92;
+    border: 1px solid var(--kmb-color);
     color: #fff;
 }
 
@@ -1011,7 +1028,7 @@ ul.portfolio-categ li a:active {
     width: 18px;
     height: 18px;
     margin-right: 8px;
-    color: #285D92;
+    color: var(--kmb-color);
     text-align: center;
     border-radius: 50%;
     margin-left: 6px;
@@ -1060,7 +1077,7 @@ ul.portfolio-categ li a:active {
 
 .info-blocks i.icon-info-blocks {
     float: left;
-    color: #285D92;
+    color: var(--kmb-color);
     font-size: 30px;
     min-width: 50px;
     margin-top: 10px;
@@ -1427,14 +1444,14 @@ ul.team-detail li ul.social-network li i {
     display: block;
     overflow: hidden;
     padding: 11px 0 5px;
-    border-top: 5px solid #285D92;
+    border-top: 5px solid var(--kmb-color);
     border-bottom: 2px dotted #CDCDCD;
 }
 
 .pricing-box-item .pricing-terms h6 {
     font-style: italic;
     margin-top: 10px;
-    color: #285D92;
+    color: var(--kmb-color);
     font-size: 17px;
     font-family: 'Noto Serif', serif;
 }
@@ -1552,7 +1569,7 @@ ul.social-network li {
     text-align: center;
     height: 32px;
     vertical-align: baseline;
-    border-bottom: 2px solid #285D92;
+    border-bottom: 2px solid var(--kmb-color);
 }
 
 #sub-footer {
@@ -1919,7 +1936,7 @@ article .align-right {
     li.active {
         border: none;
         overflow: hidden;
-        background: #285D92;
+        background: var(--kmb-color);
     }
 
     .box {
@@ -2026,7 +2043,7 @@ article .align-right {
     height: 10px;
     margin: 1px;
     text-indent: -999px;
-    border: 1px solid #285D92;
+    border: 1px solid var(--kmb-color);
     border-radius: 10px;
     cursor: pointer;
     background-color: #000 \9;
@@ -2037,7 +2054,7 @@ article .align-right {
     margin: 0;
     width: 12px;
     height: 12px;
-    background-color: #285D92;
+    background-color: var(--kmb-color);
 }
 
 video.center {
@@ -2055,7 +2072,7 @@ video.center {
 }
 
 .styled-table thead tr {
-    background-color: #285D92;
+    background-color: var(--kmb-color);
     color: #ffffff;
     text-align: left;
 }
@@ -2074,7 +2091,7 @@ video.center {
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #285D92;
+    border-bottom: 2px solid var(--kmb-color);
 }
 
 .styled-table tbody tr {
@@ -2086,7 +2103,7 @@ video.center {
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #285D92;
+    border-bottom: 2px solid var(--kmb-color);
 }
 
 hr {
@@ -2098,16 +2115,16 @@ hr {
 }
 
 hr.center-ball {
-    background: #285D92;
+    background: var(--kmb-color);
 }
 
 hr.center-ball:before {
     content: "";
     width: 6px;
     height: 6px;
-    background: #285D92;
+    background: var(--kmb-color);
     display: inline-block;
-    border: 2px solid #285D92;
+    border: 2px solid var(--kmb-color);
     border-radius: 50%;
     position: absolute;
     top: -4px;
