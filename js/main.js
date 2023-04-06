@@ -1,7 +1,8 @@
+// Common Header
 class CommonHeader extends HTMLElement {
     connectedCallback() {
         var thispage = this.attributes.thispage.value
-        var headerText = `
+        var contentText = `
         <header>
             <div class="navbar navbar-default navbar-static-top">
                 <div class="container">
@@ -14,88 +15,90 @@ class CommonHeader extends HTMLElement {
                         </button>
         `
         if (thispage == 'home') {
-            headerText += `
+            contentText += `
             <a class="navbar-brand" href="/index.html"><img alt="logo" src="/img/kmb_logo_large.png"
                                 style="height:400%"></a>
             `
         } else {
-            headerText += `
+            contentText += `
             <a class="navbar-brand" href="/index.html"><img src="/img/kmb_logo.svg" alt="logo"
 								style="height:200%"></a>
             `
         }
-        headerText += `
+        contentText += `
                     </div>
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
         `
         if (thispage == 'home') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/index.html">Home</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/index.html">Home</a></li>
             `
         }
         if (thispage == 'technology') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/technology.html">Technology</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/technology.html">Technology</a></li>
             `
         }
         if (thispage == 'applications') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/applications.html">Applications</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/applications.html">Applications</a></li>
             `
         }
         if (thispage == 'products') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/products.html">Products</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/products.html">Products</a></li>
             `
         }
         if (thispage == 'resources') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/resources.html">Resources</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/resources.html">Resources</a></li>
             `
         }
         if (thispage == 'contact') {
-            headerText += `
+            contentText += `
                             <li class="active"><a href="/contact.html">Contact</a></li>
             `
         } else {
-            headerText += `
+            contentText += `
                             <li><a href="/contact.html">Contact</a></li>
             `
         }
-        headerText += `
+        contentText += `
                         </ul>
                     </div>
                 </div>
             </div>
         </header>
         `
-        this.innerHTML = headerText
+        this.innerHTML = contentText
     }
 }
 customElements.define('common-header', CommonHeader );
+// /Common Header
 
+// Inner Header
 class InnerHeader extends HTMLElement {
     connectedCallback() {
         var pagename = this.attributes.pagename.value
@@ -113,14 +116,18 @@ class InnerHeader extends HTMLElement {
     }
 }
 customElements.define('inner-header', InnerHeader )
+// /Inner Header
 
+// Scroll UP
 class ScrollUp extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>`
     }
 }
 customElements.define('scroll-up', ScrollUp )
+// /Scroll Up
 
+// Common Footer
 class CommonFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
@@ -199,9 +206,64 @@ class CommonFooter extends HTMLElement {
     }
 }
 customElements.define('common-footer', CommonFooter )
+// /Common Footer
 
-// $(document).ready(function () {
-//     $("#download-daa").click(function () {
-//         $("#popupModalDAA").modal("hide");
-//     });
-// });
+// Common Download Form
+class CommonDownloadForm extends HTMLElement {
+    connectedCallback() {
+        var thisitem = this.attributes.thisitem.value
+        var src = this.attributes.src.value
+        var contentText = `
+            <div id="brochure-` + thisitem + `">
+            <!-- Modal -->
+            <div class="modal fade" id="popupModal-` + thisitem + `" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h1>Download Brochure </h1>
+                            <h2>Please fill in the details below to download the requested brochure:</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="column">
+                                <form id="download-form-` + thisitem + `" class="download-form">
+                                    <div class="form-group has-feedback">
+                                        <label for="name">Name*</label>
+                                        <input type="text" class="form-control" name="name" placeholder="">
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="email">E-mail*</label>
+                                        <input type="email" class="form-control" name="email" placeholder="">
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="company">Company</label>
+                                        <input type="company" class="form-control" name="company"
+                                            placeholder="">
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="jobtitle">Job Title</label>
+                                        <input type="jobTItle" class="form-control" name="jobtitle"
+                                            placeholder="">
+                                    </div>
+                                    <div class="form-group has-feedback">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" name="phone" placeholder="">
+                                    </div>
+                                    <input type="submit" name="submit" value="Download"
+                                        class="submit btn btn-default">
+                                    <!-- Fake Link -->
+                                    <button type="button" name="hidden-button" hidden
+                                        onclick="window.open('` + src + `', '_blank')">hidden download link ` + thisitem + `</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `
+        this.innerHTML = contentText
+    }
+}
+customElements.define('common-download-form', CommonDownloadForm )
+// /Common Download Form
