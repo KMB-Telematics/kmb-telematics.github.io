@@ -10,6 +10,7 @@ export default class FetchService {
         try {
             const rawResponse = await fetch(fetchLink, {
                 method: "GET",
+                // mode: "no-cors",
                 headers: headers,
                 query: (query != null) ? query : ""
             });
@@ -29,6 +30,7 @@ export default class FetchService {
         try {
             const rawResponse = await fetch(fetchLink, {
                 method: "POST",
+                // mode: "no-cors",
                 headers: headers,
                 body: JSON.stringify(body)
             });
@@ -48,6 +50,7 @@ export default class FetchService {
         try {
             const rawResponse = await fetch(fetchLink, {
                 method: "PUT",
+                // mode: "no-cors",
                 headers: headers,
                 body: JSON.stringify(body)
             });
