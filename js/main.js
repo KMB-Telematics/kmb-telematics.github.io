@@ -136,6 +136,7 @@ class CommonFooter extends HTMLElement {
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="widget">
+                            <h5 class="widgetheading">Our Contact</h5>
                             <address>
                                 <strong>KMB Telematics Inc.</strong><br>
                                 2111 Wilson Blvd., Suite 700<br>
@@ -154,17 +155,27 @@ class CommonFooter extends HTMLElement {
                         </div>
                     </div>
                     <div class="col-lg-3">
+                        <div class="widget">
+                            <h5 class="widgetheading">Quick Links</h5>
+                            <ul class="link-list">
+                                <li><a href="#">Latest Events</a></li>
+                                <li><a href="#">Terms and conditions</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="#">Career</a></li>
+                                <li><a href="/contact.html">Contact us</a></li>
+                            </ul>
+                        </div>
 
                     </div>
                     <div class="col-lg-3">
 
                     </div>
                     <div class="col-lg-3">
-                        <strong>Subscribe to our newsletter</strong><br>
+                        <h5 class="widgetheading">Subscribe to our newsletter</h5>
                         <div id="subscribe-done" style="display: none">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
-                                You have been successfully subscribed. Thank you!
+                                You have been subscribed successfully. Thank you!
                             </div>
                         </div>
                         <div class="subscribes">
@@ -184,8 +195,7 @@ class CommonFooter extends HTMLElement {
                         <div class="col-lg-6">
                             <div class="copyright">
                                 <p>
-                                    <span>&copy; KMB Telematics Inc. 2023 All rights reserved. </span><a href="#"
-                                        Swifty="_blank">Terms of Use</a>. <a href="#" Swifty="_blank">Privacy Policy</a>.
+                                    <span>&copy; KMB Telematics Inc. 2023 All rights reserved. </span>
                                 </p>
                                 </p>
                             </div>
