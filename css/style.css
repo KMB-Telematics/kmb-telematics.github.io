@@ -2139,17 +2139,33 @@ hr.center-ball:before {
 }
 
 .modal-dialog {
-    max-width: 420px;
+    max-width: 500px;
     margin: 2rem auto;
 }
 
 .modal-content {
     border-radius: 4rem;
-    width: 140%;
+    width: 100%;
     -webkit-box-shadow: -1px -2px 42px -19px rgba(0, 0, 0, 0.74);
     -moz-box-shadow: -1px -2px 42px -19px rgba(0, 0, 0, 0.74);
     box-shadow: -1px -2px 42px -19px rgba(0, 0, 0, 0.74);
 }
+
+.modal-dialog-centered {
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center;
+    min-height:calc(100% - (.5rem * 2));
+  }
+  
+  @media (min-width: 576px) {
+    .modal-dialog-centered {
+      min-height:calc(100% - (1.75rem * 2));
+    }
+  }
 
 .modal-content h1,
 .modal-content h2,
