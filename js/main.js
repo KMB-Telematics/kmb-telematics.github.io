@@ -160,7 +160,7 @@ class CommonFooter extends HTMLElement {
                             <ul class="link-list">
                                 <li><a href="#">Latest Events</a></li>
                                 <li><a href="#">Terms and conditions</a></li>
-                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="/subpages/privacy-policy.html">Privacy policy</a></li>
                                 <li><a href="#">Career</a></li>
                                 <li><a href="/contact.html">Contact us</a></li>
                             </ul>
