@@ -225,9 +225,14 @@ async function submitLoginForm(e, form) {
     }
 
     try {
+        // 3. Submit the form
+        // 3.1 User Interaction
+        const btnSubmit = document.getElementById('login-submit');
+        btnSubmit.disabled = true;
+        setTimeout(() => btnSubmit.disabled = false, 2000);
         form.username.value = '';
         form.password.value = '';
-        alert(`Sorry, unexpected error. Please try again later.`);
+        alert(`Username and/or Password didn't match`);
     }
     catch (err) {
         console.error(`Error at login: ${err}`);

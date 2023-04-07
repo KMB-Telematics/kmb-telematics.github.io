@@ -9,6 +9,7 @@ Note: Licence under Creative Commons Attribution 3.0
 
 :root {
     --kmb-color:#285D92;
+    --kmb-color-light: #6FB4F0;
 }
 
 body {
@@ -753,7 +754,7 @@ ul.breadcrumb li a:hover {
 }
 
 .contact .submit:hover {
-    background: #6FB4F0;
+    background: var(--kmb-color-light);
 }
 
 input.error,
@@ -794,7 +795,7 @@ textarea.error {
 }
 
 .subscribe .submit:hover {
-    background: #6FB4F0;
+    background: var(--kmb-color-light);
 }
 
 /*-------Download---------*/
@@ -826,7 +827,7 @@ textarea.error {
 }
 
 .download-form .submit:hover {
-    background: #6FB4F0;
+    background: var(--kmb-color-light);
 }
 
 /*-------Download---------*/
@@ -840,6 +841,10 @@ textarea.error {
     border: none !important;
     border-radius: 0;
     float: left;
+}
+
+.login .submit:hover {
+    background: var(--kmb-color-light);
 }
 
 /* --- search form --- */
