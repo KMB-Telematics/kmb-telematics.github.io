@@ -40,21 +40,21 @@
 		<section id="content">
 			<div class="container content">
 				<div class="row service-v1 margin-bottom-40">
-					<blog-post src="/subpages/counter-uas.html" title="Counter UAS (C-UAS)"></blog-post>
+					<blog-post src="/subpages/counter-uas.html"></blog-post>
 
-					<blog-post src="/subpages/drone-stationary.html" title="Stationary Drone Detection"></blog-post>
+					<blog-post src="/subpages/drone-stationary.html"></blog-post>
 
-					<blog-post src="/subpages/drone-hovering.html" title="Hovering Drone Detection"></blog-post>
+					<blog-post src="/subpages/drone-hovering.html"></blog-post>
 
-					<blog-post src="/subpages/drone-on-the-move.html" title="Drone Detection On-the-Move"></blog-post>
+					<blog-post src="/subpages/drone-on-the-move.html"></blog-post>
 
-					<blog-post src="/subpages/aps.html" title="Active Protection Systems"></blog-post>
+					<blog-post src="/subpages/aps.html"></blog-post>
 
-					<blog-post src="/subpages/daa-radar.html" title="Airborne Detect and Avoid (DAA)"></blog-post>
+					<blog-post src="/subpages/daa-radar.html"></blog-post>
 
-					<blog-post src="/subpages/bvlos-ops.html" title="Beyond Visual Line of Sight (BVLOS) Drone Ops"></blog-post>
+					<blog-post src="/subpages/bvlos-ops.html"></blog-post>
 
-					<blog-post src="/subpages/part-107-waivers.html" title="Part 107.31 Waivers"></blog-post>
+					<blog-post src="/subpages/part-107-waivers.html"></blog-post>
 				</div>
 			</div>
 		</section>
@@ -85,7 +85,6 @@
 		class BlogPost extends HTMLElement {
 			connectedCallback() {
 				var src = this.attributes.src.value;
-				var title = this.attributes.title.value;
 				// get only the filename
 				var name = src.replace(/^.*[\\\/]/, '');
 				name = name.replace(/\.[^/.]+$/, '');
@@ -95,7 +94,7 @@
 							<a href="/subpages/` + name + `.html">
 								<div class="blog-cover" id="cover-` + name + `"></div>
 							</a>
-							<h4><a href="/subpages/` + name + `.html">` + title + `</a></h4>
+							<h4><a href="/subpages/` + name + `.html"><div class="blog-title" id="title-` + name + `"></div></a></h4>
 							<div class="blog-snippet" id="snippet-` + name + `"></div>
 						</div>
 					</div>
@@ -108,6 +107,11 @@
 	<script>
 		var blogFunction = function (param) {
 			$('.blog-cover#cover-' + param).load('/subpages/' + param + '.html #blog-img');
+			$('.blog-title#title-' + param).load('/subpages/' + param + '.html #blog-header', function () {
+				var $h = $(this);
+				var text = $h.text();
+				$h.text(text);
+			});
 			$('.blog-snippet#snippet-' + param).load('/subpages/' + param + '.html #blog-text', function () {
 				var $p = $(this);
 				var text = $p.text();
