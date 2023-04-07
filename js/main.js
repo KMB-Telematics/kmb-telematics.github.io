@@ -1,7 +1,7 @@
 // Common Header
 class CommonHeader extends HTMLElement {
     connectedCallback() {
-        var thispage = this.attributes.thispage.value
+        var thispage = this.attributes.thispage.value;
         var contentText = `
         <header>
             <div class="navbar navbar-default navbar-static-top">
@@ -13,77 +13,77 @@ class CommonHeader extends HTMLElement {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-        `
+        `;
         if (thispage == 'home') {
             contentText += `
             <a class="navbar-brand" href="/index.html"><img alt="logo" src="/img/kmb_logo_large.png"
                                 style="height:400%"></a>
-            `
+            `;
         } else {
             contentText += `
             <a class="navbar-brand" href="/index.html"><img src="/img/kmb_logo.svg" alt="logo"
 								style="height:200%"></a>
-            `
+            `;
         }
         contentText += `
                     </div>
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-        `
+        `;
         if (thispage == 'home') {
             contentText += `
                             <li class="active"><a href="/index.html">Home</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/index.html">Home</a></li>
-            `
+            `;
         }
         if (thispage == 'technology') {
             contentText += `
                             <li class="active"><a href="/technology.html">Technology</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/technology.html">Technology</a></li>
-            `
+            `;
         }
         if (thispage == 'applications') {
             contentText += `
                             <li class="active"><a href="/applications.html">Applications</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/applications.html">Applications</a></li>
-            `
+            `;
         }
         if (thispage == 'products') {
             contentText += `
                             <li class="active"><a href="/products.html">Products</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/products.html">Products</a></li>
-            `
+            `;
         }
         if (thispage == 'resources') {
             contentText += `
                             <li class="active"><a href="/resources.html">Resources</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/resources.html">Resources</a></li>
-            `
+            `;
         }
         if (thispage == 'contact') {
             contentText += `
                             <li class="active"><a href="/contact.html">Contact</a></li>
-            `
+            `;
         } else {
             contentText += `
                             <li><a href="/contact.html">Contact</a></li>
-            `
+            `;
         }
         contentText += `
                         </ul>
@@ -91,8 +91,8 @@ class CommonHeader extends HTMLElement {
                 </div>
             </div>
         </header>
-        `
-        this.innerHTML = contentText
+        `;
+        this.innerHTML = contentText;;
     }
 }
 customElements.define('common-header', CommonHeader );
@@ -101,7 +101,7 @@ customElements.define('common-header', CommonHeader );
 // Inner Header
 class InnerHeader extends HTMLElement {
     connectedCallback() {
-        var pagename = this.attributes.pagename.value
+        var pagename = this.attributes.pagename.value;
         this.innerHTML = `
         <section id="inner-headline">
 			<div class="container">
@@ -112,19 +112,19 @@ class InnerHeader extends HTMLElement {
 				</div>
 			</div>
 		</section>
-        `
+        `;
     }
 }
-customElements.define('inner-header', InnerHeader )
+customElements.define('inner-header', InnerHeader );
 // /Inner Header
 
 // Scroll UP
 class ScrollUp extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>`
+        this.innerHTML = `<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>`;
     }
 }
-customElements.define('scroll-up', ScrollUp )
+customElements.define('scroll-up', ScrollUp );
 // /Scroll Up
 
 // Common Footer
@@ -212,17 +212,17 @@ class CommonFooter extends HTMLElement {
                 </div>
             </div>
         </footer>
-        `
+        `;
     }
 }
-customElements.define('common-footer', CommonFooter )
+customElements.define('common-footer', CommonFooter );
 // /Common Footer
 
 // Common Download Form
 class CommonDownloadForm extends HTMLElement {
     connectedCallback() {
-        var thisitem = this.attributes.thisitem.value
-        var src = this.attributes.src.value
+        var thisitem = this.attributes.thisitem.value;
+        var src = this.attributes.src.value;
         var contentText = `
             <div id="brochure-` + thisitem + `">
             <!-- Modal -->
@@ -271,9 +271,9 @@ class CommonDownloadForm extends HTMLElement {
                 </div>
             </div>
         </div>
-        `
-        this.innerHTML = contentText
+        `;
+        this.innerHTML = contentText;
     }
 }
-customElements.define('common-download-form', CommonDownloadForm )
+customElements.define('common-download-form', CommonDownloadForm );
 // /Common Download Form

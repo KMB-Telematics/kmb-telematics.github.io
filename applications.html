@@ -40,62 +40,21 @@
 		<section id="content">
 			<div class="container content">
 				<div class="row service-v1 margin-bottom-40">
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/counter-uas.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/counter-uas.html">Counter UAS (C-UAS)</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/drone-stationary.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/drone-stationary.html">Stationary Drone Detection</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/drone-hovering.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/drone-hovering.html">Hovering Drone Detection</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/drone-on-the-move.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/drone-on-the-move.html">Drone Detection On-the-Move</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/aps.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/aps.html">Active Protection Systems</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/daa-radar.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/daa-radar.html">Airborne Detect and Avoid (DAA)</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/bvlos-ops.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/bvlos-ops.html">Beyond Visual Line of Sight (BVLOS) Drone Ops</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
-					<div class="col-md-3 md-margin-bottom-40">
-						<a href="/subpages/part-107-waivers.html"><img class="img-responsive" src="/img/sample-image.png" alt=""></a>
-						<h4><a href="/subpages/part-107-waivers.html">Part 107.31 Waivers</a></h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur
-							aliquam, incidunt eius magni provident, doloribus omnis minus temporibus perferendis
-							nesciunt quam repellendus nulla nemo ipsum odit corrupti consequuntur possimus</p>
-					</div>
+					<blog-post src="/subpages/counter-uas.html" pageheader="Counter UAS (C-UAS)"></blog-post>
+
+					<blog-post src="/subpages/drone-stationary.html" pageheader="Stationary Drone Detection"></blog-post>
+
+					<blog-post src="/subpages/drone-hovering.html" pageheader="Hovering Drone Detection"></blog-post>
+
+					<blog-post src="/subpages/drone-on-the-move.html" pageheader="Drone Detection On-the-Move"></blog-post>
+
+					<blog-post src="/subpages/aps.html" pageheader="Active Protection Systems"></blog-post>
+
+					<blog-post src="/subpages/daa-radar.html" pageheader="Airborne Detect and Avoid (DAA)"></blog-post>
+
+					<blog-post src="/subpages/bvlos-ops.html" pageheader="Beyond Visual Line of Sight (BVLOS) Drone Ops"></blog-post>
+
+					<blog-post src="/subpages/part-107-waivers.html" pageheader="Part 107.31 Waivers"></blog-post>
 				</div>
 			</div>
 		</section>
@@ -122,6 +81,50 @@
 	<script src="/js/custom.js"></script>
 	<script type=module src="/js/main.js"></script>
 	<script type=module src="/js/formhandlers.js"></script>
+	<script>
+		class BlogPost extends HTMLElement {
+			connectedCallback() {
+				var src = this.attributes.src.value;
+				var pageHeader = this.attributes.pageheader.value;
+				// get only the filename
+				var name = src.replace(/^.*[\\\/]/, '');
+				name = name.replace(/\.[^/.]+$/, '');
+				var contentText = `
+					<div class="col-md-3 md-margin-bottom-40">
+						<div class="blog" id="` + name + `">
+							<a href="/subpages/` + name + `.html">
+								<div class="blog-cover" id="cover-` + name + `"></div>
+							</a>
+							<h4><a href="/subpages/` + name + `.html">` + pageHeader + `</a></h4>
+							<div class="blog-snippet" id="snippet-` + name + `"></div>
+						</div>
+					</div>
+				`;
+				this.innerHTML = contentText;
+			}
+		}
+		customElements.define('blog-post', BlogPost );
+	</script>
+	<script>
+		var blogFunction = function (param) {
+			$('.blog-cover#cover-' + param).load('/subpages/' + param + '.html #blog-img');
+			$('.blog-snippet#snippet-' + param).load('/subpages/' + param + '.html #blog-text', function () {
+				var $p = $(this);
+				var text = $p.text();
+				var shortString = text.substring(0, 200) + '[...]';
+				$p.data('fulltext', text);
+				$p.text(shortString);
+			});
+		};
+		blogFunction('counter-uas');
+		blogFunction('drone-stationary');
+		blogFunction('drone-hovering');
+		blogFunction('drone-on-the-move');
+		blogFunction('aps');
+		blogFunction('daa-radar');
+		blogFunction('bvlos-ops');
+		blogFunction('part-107-waivers');
+	</script>
 </body>
 
 </html>
