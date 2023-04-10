@@ -115,9 +115,8 @@
 			$('.blog-snippet#snippet-' + param).load('/subpages/' + param + '.html #blog-text', function () {
 				var $p = $(this);
 				var text = $p.text();
-				var shortString = text.substring(0, 200) + '[...]';
-				$p.data('fulltext', text);
-				$p.text(shortString);
+				var shortString = text.substring(0, 200) + '<a href="/subpages/' + param + '.html">[...]</a>';
+				$p.html(shortString);
 			});
 		};
 		blogFunction('counter-uas');
