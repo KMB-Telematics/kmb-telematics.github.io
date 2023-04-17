@@ -158,10 +158,10 @@ class CommonFooter extends HTMLElement {
                         <div class="widget">
                             <h5 class="widgetheading">Quick Links</h5>
                             <ul class="link-list">
-                                <li><a href="#">Latest Events</a></li>
+                                <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/">Latest Updates</a></li>
                                 <li><a href="/subpages/terms-and-conditions.html">Terms and Conditions</a></li>
                                 <li><a href="/subpages/privacy-policy.html">Privacy Policy</a></li>
-                                <li><a href="#">Career</a></li>
+                                <li><a href="#">Careers</a></li>
                                 <li><a href="/contact.html">Contact Us</a></li>
                             </ul>
                         </div>
