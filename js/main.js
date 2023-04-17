@@ -232,7 +232,7 @@ class CommonDownloadForm extends HTMLElement {
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">×</button>
                             <h1>Download Brochure </h1>
-                            <h2>Please fill in the details below to download the requested brochure:</h2>
+                            <h2>Please fill in the details below to download the requested materials:</h2>
                         </div>
                         <div class="modal-body">
                             <div class="column">
