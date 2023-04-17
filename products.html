@@ -3,16 +3,16 @@
 
 <head>
 	<meta charset="utf-8">
-    <title>KMB Telematics - Software-Defined Imaging Radar for Stationary Drone Detection, Counter-UAS, Detect-and-Avoid, and BVLOS - Products</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="KMB Telematics - Digital Imaging Radar" name="description">
-    <meta content="KMB Telematics Inc." name="author">
-    <meta name=”robots” content=”index,follow” />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" href="/img/favicon/favicon.ico">
-    <link rel="manifest" href="/img/favicon/site.webmanifest">
+	<title>KMB Telematics - Software-Defined Imaging Radar for Stationary Drone Detection, Counter-UAS, Detect-and-Avoid, and BVLOS - Products</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="KMB Telematics - Digital Imaging Radar" name="description">
+	<meta content="KMB Telematics Inc." name="author">
+	<meta name=”robots” content=”index,follow” />
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+	<link rel="icon" type="image/png" href="/img/favicon/favicon.ico">
+	<link rel="manifest" href="/img/favicon/site.webmanifest">
 	<!-- css -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet">
@@ -101,7 +101,7 @@
 								<tr>
 									<td>Min Velocity</td>
 									<td>0 m/s</td>
-									<td>Zero Doppler&#8482;</td>
+									<td><a href="/technology.html#zero-doppler">Zero Doppler&#8482;</a></td>
 								</tr>
 								<tr>
 									<td>Max Velocity</td>
@@ -162,6 +162,12 @@
 						<div class="about-carousel wow fadeInLeft animated" data-wow-animation-name="none"
 							style="visibility: visible; -webkit-animation-name: none;">
 							<div id="carousel-cuas" class="carousel slide">
+								<!-- Carousel ind -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-cuas" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-cuas" data-slide-to="1"></li>
+									<li data-target="#carousel-cuas" data-slide-to="2"></li>
+								</ol>
 								<!-- Carousel items -->
 								<div class="carousel-inner">
 									<div class="active item"><img src="/img/ucas1.png" alt=""></div>
@@ -170,15 +176,16 @@
 								</div>
 								<!-- Carousel nav -->
 								<a class="carousel-control left" href="#carousel-cuas" data-slide="prev"
-									style="color: #285D92;"><i class="fa fa-angle-left"></i></a>
+									style="color: var(--kmb-color);"><i class="fa fa-angle-left"></i></a>
 								<a class="carousel-control right" href="#carousel-cuas" data-slide="next"
-									style="color: #285D92;"><i class="fa fa-angle-right"></i></a>
+									style="color: var(--kmb-color);"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<br />
 						<!-- Button trigger modal -->
 						<a href="#" data-toggle="modal" data-target="#popupModal-cuas">Download Brochure</a>
-						<common-download-form thisitem="cuas" src="/pdf/KMB Software Defined Radar, cUAS.pdf"></common-download-form>
+						<common-download-form thisitem="cuas"
+							src="/pdf/KMB Software Defined Radar, cUAS.pdf"></common-download-form>
 						<br />
 					</div>
 				</div>
@@ -247,7 +254,7 @@
 								<tr>
 									<td>Min Velocity</td>
 									<td>0 m/s</td>
-									<td>Zero Doppler&#8482;</td>
+									<td><a href="/technology.html#zero-doppler">Zero Doppler&#8482;</a></td>
 								</tr>
 								<tr>
 									<td>Max Velocity</td>
@@ -318,6 +325,11 @@
 						<div class="about-carousel wow fadeInLeft animated" data-wow-animation-name="none"
 							style="visibility: visible; -webkit-animation-name: none;">
 							<div id="carousel-daa" class="carousel slide">
+								<!-- Carousel ind -->
+								<ol class="carousel-indicators">
+									<li data-target="#carousel-daa" data-slide-to="0" class="active"></li>
+									<li data-target="#carousel-daa" data-slide-to="1"></li>
+								</ol>
 								<!-- Carousel items -->
 								<div class="carousel-inner">
 									<div class="active item"><img src="/img/daa1.png" alt=""></div>
@@ -325,15 +337,16 @@
 								</div>
 								<!-- Carousel nav -->
 								<a class="carousel-control left" href="#carousel-daa" data-slide="prev"
-									style="color: #285D92;"><i class="fa fa-angle-left"></i></a>
+									style="color: var(--kmb-color);"><i class="fa fa-angle-left"></i></a>
 								<a class="carousel-control right" href="#carousel-daa" data-slide="next"
-									style="color: #285D92;"><i class="fa fa-angle-right"></i></a>
+									style="color: var(--kmb-color);"><i class="fa fa-angle-right"></i></a>
 							</div>
 						</div>
 						<br />
 						<!-- Button trigger modal -->
 						<a href="#" data-toggle="modal" data-target="#popupModal-daa">Download Brochure</a>
-						<common-download-form thisitem="daa" src="/pdf/KMB Software Defined Radar, Airborne DAA.pdf"></common-download-form>
+						<common-download-form thisitem="daa"
+							src="/pdf/KMB Software Defined Radar, Airborne DAA.pdf"></common-download-form>
 						<br />
 					</div>
 				</div>

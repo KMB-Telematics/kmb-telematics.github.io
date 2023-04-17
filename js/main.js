@@ -277,3 +277,10 @@ class CommonDownloadForm extends HTMLElement {
 }
 customElements.define('common-download-form', CommonDownloadForm );
 // /Common Download Form
+
+
+// Common carousal control
+$('.carousel').carousel({
+    interval: 5000,
+    pause: "hover",
+});
