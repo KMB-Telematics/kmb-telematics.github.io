@@ -95,7 +95,7 @@ class CommonHeader extends HTMLElement {
         this.innerHTML = contentText;;
     }
 }
-customElements.define('common-header', CommonHeader);
+customElements.define('common-header', CommonHeader );
 // /Common Header
 
 // Inner Header
@@ -115,7 +115,7 @@ class InnerHeader extends HTMLElement {
         `;
     }
 }
-customElements.define('inner-header', InnerHeader);
+customElements.define('inner-header', InnerHeader );
 // /Inner Header
 
 // Scroll UP
@@ -124,7 +124,7 @@ class ScrollUp extends HTMLElement {
         this.innerHTML = `<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>`;
     }
 }
-customElements.define('scroll-up', ScrollUp);
+customElements.define('scroll-up', ScrollUp );
 // /Scroll Up
 
 // Common Footer
@@ -215,7 +215,7 @@ class CommonFooter extends HTMLElement {
         `;
     }
 }
-customElements.define('common-footer', CommonFooter);
+customElements.define('common-footer', CommonFooter );
 // /Common Footer
 
 // Common Download Form
@@ -275,7 +275,7 @@ class CommonDownloadForm extends HTMLElement {
         this.innerHTML = contentText;
     }
 }
-customElements.define('common-download-form', CommonDownloadForm);
+customElements.define('common-download-form', CommonDownloadForm );
 // /Common Download Form
 
 
