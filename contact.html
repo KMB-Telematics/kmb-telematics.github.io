@@ -58,7 +58,7 @@
 								</div>
 								<div class="form-group has-feedback">
 									<label for="subject">Subject*</label>
-									<select class="form-control" name="subject" onchange="showField(this.options[this.selectedIndex].value);">
+									<select class="form-control" name="subject" id="subject" onchange="showField(this.options[this.selectedIndex].value);">
 										<option value="default">Choose a subject</option>
 										<option value="General inquiry">General inquiry</option>
 										<option value="Price and quotation">Price and quotation</option>
@@ -120,7 +120,14 @@
 				document.getElementById('other-subject').innerHTML = ``;
 			}	
 		}
-	</script> 
+	</script>
+	<script>
+		const hashParams = window.location.search.substr(1).split('&');
+		for(var i = 0; i < hashParams.length; i++){
+    		var p = hashParams[i].split('=');
+    		document.getElementById(p[0]).value = decodeURIComponent(p[1]);
+		}
+	</script>
 </body>
 
 </html>
