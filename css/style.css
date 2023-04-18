@@ -481,6 +481,10 @@ select.selectmenu {
     bottom: -30px;
 }
 
+.carousel-caption {
+    padding-bottom: 0px;
+}
+
 .text-center img {
     margin: auto;
     width: 100%;
