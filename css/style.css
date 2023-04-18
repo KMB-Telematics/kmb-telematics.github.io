@@ -2213,3 +2213,8 @@ hr.center-ball:before {
 .blog {
     padding-bottom: 50px;
 }
+
+.blog-image {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
