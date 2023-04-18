@@ -10,6 +10,7 @@ Note: Licence under Creative Commons Attribution 3.0
 :root {
     --kmb-color:#285D92;
     --kmb-color-light: #6FB4F0;
+    --kmb-color-complement: #925D28;
 }
 
 body {
