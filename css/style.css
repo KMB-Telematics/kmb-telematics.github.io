@@ -763,13 +763,18 @@ ul.breadcrumb li a:hover {
 }
 
 input.error,
-textarea.error {
+textarea.error, 
+select.error {
     background-color: #fff;
     border: 1px solid red !Important;
     -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
     -o-transition: border linear 0.2s, box-shadow linear 0.2s;
     transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+
+select.form-control {
+    padding-left: 20pt;
 }
 
 /*-------Subscribe---------*/
