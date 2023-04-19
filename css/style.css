@@ -321,6 +321,18 @@ select.selectmenu {
     padding: 0;
 }
 
+.logo-large {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.logo-small {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 /*  Sliders
 ==================================== */
 /* --- flexslider --- */
@@ -763,7 +775,7 @@ ul.breadcrumb li a:hover {
 }
 
 input.error,
-textarea.error, 
+textarea.error,
 select.error {
     background-color: #fff;
     border: 1px solid red !Important;
@@ -2239,5 +2251,36 @@ hr.center-ball:before {
     padding-bottom: 20px;
     color: #fff;
     text-align: center;
-    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
 }
+
+.videowrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.videowrapper video {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.map-responsive {
+    position: relative;
+    padding-bottom: 95%; 
+    height: 0;
+    overflow: hidden;
+}
+
+.map-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }

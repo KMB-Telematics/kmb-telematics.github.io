@@ -17,12 +17,12 @@ class CommonHeader extends HTMLElement {
         if (thispage == 'home') {
             contentText += `
             <a class="navbar-brand" href="/index.html"><img alt="logo" src="/img/kmb_logo_large.png"
-                                style="height:400%"></a>
+                                class="logo-large"></a>
             `;
         } else {
             contentText += `
-            <a class="navbar-brand" href="/index.html"><img src="/img/kmb_logo.svg" alt="logo"
-								style="height:200%"></a>
+            <a class="navbar-brand" href="/index.html"><img src="/img/kmb_logo.png" alt="logo"
+								class="logo-small"></a>
             `;
         }
         contentText += `
