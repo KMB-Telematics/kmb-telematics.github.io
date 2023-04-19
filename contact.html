@@ -122,10 +122,13 @@
 		}
 	</script>
 	<script>
-		const hashParams = window.location.search.substr(1).split('&');
-		for(var i = 0; i < hashParams.length; i++){
-    		var p = hashParams[i].split('=');
-    		document.getElementById(p[0]).value = decodeURIComponent(p[1]);
+		const foundParams = window.location.search;
+		if (foundParams != '') {
+			const hashParams = foundParams.substr(1).split('&');
+			for(var i = 0; i < hashParams.length; i++){
+				var p = hashParams[i].split('=');
+				document.getElementById(p[0]).value = decodeURIComponent(p[1]);
+			}
 		}
 	</script>
 </body>
