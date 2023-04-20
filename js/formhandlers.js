@@ -19,8 +19,8 @@ async function submitContactForm(e, form) {
     // 2. Validate the form
     var name = form.name;
     var email = form.email;
+    var subject = form.subject;
     var comment = form.message;
-
 
     //Simple validation to make sure user entered something
     //If error found, add hightlight class to the text field
@@ -39,6 +39,16 @@ async function submitContactForm(e, form) {
         returnError = true;
     } else email.classList.remove('error');
 
+    if (subject.value == 'default') {
+        subject.classList.add('error');
+        returnError = true;
+    } else if (subject.value == 'others') {
+        var othersubject = form.othersubject;
+        if (othersubject.value == '') {
+            othersubject.classList.add('error');
+            returnError = true;
+        } else othersubject.classList.remove('error');
+    } else subject.classList.remove('error');
 
     if (comment.value == '') {
         comment.classList.add('error');
@@ -66,6 +76,11 @@ async function submitContactForm(e, form) {
             document.getElementById('contact-done').style.display = 'block';
             form.name.value = '';
             form.email.value = '';
+            if (form.subject.value == 'others') {
+                form.othersubject.value = '';
+                document.getElementById('other-subject').style.display = 'none';
+            }
+            form.subject.value = 'default';
             form.message.value = '';
         }
     }
@@ -255,6 +270,10 @@ function buildJsonFormData(form) {
             colKey = 'From Web: Name';
         else if (pair[0] == 'email')
             colKey = 'From Web: Email';
+        else if (pair[0] == 'subject')
+            colKey = 'From Web: Subject';
+        else if (pair[0] == 'othersubject')
+            colKey = 'From Web: Subject';
         else if (pair[0] == 'message')
             colKey = 'From Web: Message';
         else if (pair[0] == 'company')
