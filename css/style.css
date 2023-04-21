@@ -325,12 +325,15 @@ select.selectmenu {
     display: block;
     max-width: 100%;
     height: auto;
+    margin: auto;
 }
 
 .logo-small {
     display: block;
+    width: 120px;
     max-width: 100%;
     height: auto;
+    margin: auto;
 }
 
 /*  Sliders
@@ -1814,15 +1817,18 @@ article .align-right {
     width: 49.2%;
 }
 
+
 .partner-nasa {
     /* height: 80%; */
     height: auto;
     margin: auto;
     display: block;
     width: 245px;
-    max-width: 120%;
+    max-width: 110%;
     padding-top: 15%;
     padding-bottom: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .partner-army {
@@ -1834,6 +1840,8 @@ article .align-right {
     max-width: 100%;
     padding-top: 15%;
     padding-bottom: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .cryptedphone:after {
