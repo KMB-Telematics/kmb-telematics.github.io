@@ -325,12 +325,24 @@ select.selectmenu {
     display: block;
     max-width: 100%;
     height: auto;
+    margin: auto;
 }
 
 .logo-small {
     display: block;
+    width: 120px;
     max-width: 100%;
     height: auto;
+    margin: auto;
+}
+
+@media only screen and (max-width: 700px) {
+    .logo-large {
+        width: 120px;
+    }
+    .logo-small {
+        width: 100px;
+    }
 }
 
 /*  Sliders
@@ -367,7 +379,7 @@ select.selectmenu {
 
 .flex-caption {
     zoom: 1;
-    bottom: 198px;
+    bottom: 0px;
     background-color: transparent;
     color: #fff;
     margin: 0;
@@ -400,6 +412,49 @@ select.selectmenu {
 .flex-caption p {
     margin: 12px 0 18px;
     font-size: 22px;
+}
+
+.flex-caption .flex-custom-text-line-1 {
+    font-weight: 700;
+    line-height: 1.1em;
+    display: block;
+    width: auto;
+    color: #FFF;
+    /* letter-spacing: 1px; */
+    text-transform: uppercase;
+    font-size: 45px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.flex-caption .flex-custom-text-line-2 {
+    display: block;
+    width: auto;
+    color: var(--kmb-color);
+    letter-spacing: 1px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin-bottom: 8px;
+    font-size: 40px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.495);
+}
+
+@media only screen and (max-width: 700px) {
+    .flex-caption {
+        overflow: hidden;
+        display: block !important;
+        bottom: 10px
+    }
+    .flex-caption .flex-custom-text-line-1 {
+        font-size: 16px;
+    }
+    .flex-caption .flex-custom-text-line-2 {
+        font-size: 14px;
+    }
 }
 
 .skill-home {
@@ -1814,14 +1869,18 @@ article .align-right {
     width: 49.2%;
 }
 
+
 .partner-nasa {
     /* height: 80%; */
     height: auto;
     margin: auto;
     display: block;
-    max-width: 245px;
+    width: 245px;
+    max-width: 110%;
     padding-top: 15%;
     padding-bottom: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .partner-army {
@@ -1829,9 +1888,12 @@ article .align-right {
     height: auto;
     margin: auto;
     display: block;
-    max-width: 200px;
+    width: 200px;
+    max-width: 100%;
     padding-top: 15%;
     padding-bottom: 15%;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .cryptedphone:after {
