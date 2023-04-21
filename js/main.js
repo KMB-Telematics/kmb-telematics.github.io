@@ -295,6 +295,9 @@ class BlogAddress extends HTMLElement {
         if (parentpage == 'applications') {
             pagename = 'Applications';
             pageaddress = '/applications.html';
+        } else if (parentpage == 'products') {
+            pagename = 'Products';
+            pageaddress = '/products.html';
         };
         var contentText = `
             <a href="/index.html">Home</a> &nbsp;&nbsp;>&nbsp;&nbsp; <a href="` + pageaddress + `"> ` + pagename + `</a> &nbsp;&nbsp;>&nbsp;&nbsp; ` + thispage;
