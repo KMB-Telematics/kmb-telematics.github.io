@@ -2241,6 +2241,10 @@ hr.center-ball:before {
     margin-bottom: 20px;
 }
 
+.blog-thumbnail {
+    display: none;
+}
+
 .caption {
     position: absolute;
     left: 15%;
@@ -2272,7 +2276,7 @@ hr.center-ball:before {
 
 .map-responsive {
     position: relative;
-    padding-bottom: 95%; 
+    padding-bottom: 95%;
     height: 0;
     overflow: hidden;
 }
@@ -2283,4 +2287,4 @@ hr.center-ball:before {
     left: 0;
     width: 100% !important;
     height: 100% !important;
-  }
+}

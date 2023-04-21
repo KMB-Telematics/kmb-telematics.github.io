@@ -284,3 +284,25 @@ $('.carousel').carousel({
     interval: 5000,
     pause: "hover",
 });
+
+// Blog Address
+class BlogAddress extends HTMLElement {
+    connectedCallback() {
+        var parentpage = this.attributes.parentpage.value;
+        var thispage = document.getElementById("blog-header").textContent;
+        var pagename = '';
+        var pageaddress = '';
+        if (parentpage == 'applications') {
+            pagename = 'Applications';
+            pageaddress = '/applications.html';
+        } else if (parentpage == 'products') {
+            pagename = 'Products';
+            pageaddress = '/products.html';
+        };
+        var contentText = `
+            <a href="/index.html">Home</a> &nbsp;&nbsp;>&nbsp;&nbsp; <a href="` + pageaddress + `"> ` + pagename + `</a> &nbsp;&nbsp;>&nbsp;&nbsp; ` + thispage;
+        this.innerHTML = contentText;
+    }
+}
+customElements.define('blog-address', BlogAddress);
+// /Blog Address
