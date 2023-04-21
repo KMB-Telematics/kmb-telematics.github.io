@@ -1,83 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>KMB Telematics - Digital Imaging Radar</title>
-  <link href="style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="morphext.css">
-  <script defer data-domain="kmb.ac" src="https://plausible.io/js/plausible.js"></script>
+    <meta charset="utf-8">
+    <title>KMB Telematics - Software-Defined Imaging Radar for Stationary Drone Detection, Counter-UAS, Detect-and-Avoid, and BVLOS</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="KMB Telematics - Digital Imaging Radar" name="description">
+    <meta content="KMB Telematics Inc." name="author">
+    <meta name=”robots” content=”index,follow” />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="/img/favicon/favicon.ico">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <!-- css -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <link href="/css/jcarousel.css" rel="stylesheet" />
+    <link href="/css/flexslider.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 </head>
+
 <body>
+    <div class="home-page" id="wrapper">
+        <!-- header -->
+        <common-header thispage="home"></common-header>
+        <!-- end header -->
 
-    <div class="maincontent">
-        <div class="section group">
-            <div class="col span_2_of_2">
-                <img class="logo" src="kmb.svg">
-            </div>
-        </div>
-        <div class="section group">
-            <div class="col span_2_of_2 tagline">
-                Airborne imaging radar for 
-                <span id="js-rotating">
-                    BVLOS Navigation, Terrain Avoidance, Detect and Avoid, eVTOL, Urban Air Mobility, Drone Ramming, Drone Detection, the Drone Economy, Part 107.31 Waivers
-                </span>.
+        <!-- banner -->
+        <section id="banner">
+            <div class="flexslider" id="main-slider">
+                <ul class="slides">
+                    <li>
+                        <img alt="" src="/img/background.jpg">
 
+                        <div class="flex-caption wow fadeInRight animated" data-wow-animation-name="none">
+                            <!-- <h3>Airborne Imaging Radar</h3> -->
+                            <h3>Software-Defined Imaging Radar</h3>
+                            <h1>
+                                <span id="js-rotating">
+                                    for Counter-UAS (C-UAS),
+                                    <!-- for Drone Detection, -->
+                                    for Stationary Drone Detection, 
+                                    for Hovering Drone Detection,
+                                    for Drone Detection On-the-Move,
+                                    for Active Protection Systems, 
+                                    <!-- For Electric Vertical Take-off and Landing (eVTOL), -->
+                                    for Airborne Detect and Avoid,
+                                    for Beyond Visual Line of Sight (BVLOS) Drone Ops,
+                                    <!-- For Beyond Visual Line of Sight (BVLOS) Drone Navigation, -->
+                                    for Part 107.31 Waivers
+                                </span>
+                            </h1>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- end banner -->
+
+        <!-- content -->
+        <section class="hero-text">
+            <div class="container">
+                <div class="row">
+                    <div class="videowrapper">
+                        <video width="1000" class="center" controls autoplay muted loop>
+                            <source src="/img/Drone Descending Nov 14 Final.mov" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="aligncenter">
+                <h2 class="aligncenter">Our Partners</h2>
+            </div>
+            <div class="section group">
+                <div class="col span_1_of_2">
+                    <img class="partner-nasa" src="/img/nasa-logo.png">
+                </div>
+                <div class="col span_1_of_2">
+                    <img class="partner-army" src="/img/Mark_of_the_United_States_Army.svg">
+                </div>
             </div>
         </div>
-        <div class="section group">
-            <div class="col span_1_of_2">
-                <img class="partner-nasa" src="nasa-logo.png">
-            </div>
-            <div class="col span_1_of_2">
-                <img class="partner-army" src="Mark_of_the_United_States_Army.svg">
-            </div>
-        </div>
-        <div class="section group">
-            <div class="col span_1_of_2 ljust">
-                <p>KMB Telematics Inc.</p>
-                <p>2111 Wilson Blvd.</p>
-                <p>ste 700</p>
-                <p>Arlington, VA 22201</p>
-            </div>
-            <div class="col span_1_of_2 ljust">
-                <p>
-                    <emphasis>
-                        <a href="#" class="cryptedmail"
-                        data-name="info"
-                        data-domain="kmb"
-                        data-tld="ac"
-                        onclick="window.location.href = 'mailto:' + this.dataset.name + '@' + this.dataset.domain + '.' + this.dataset.tld; return false;"></a>
-                    </emphasis>
-                </p>
-                <p></p>
-                <p></p>
-                <p></p>
-            </div>
-        </div>
-        <!-- <div class="push"></div> -->
+        <!-- content -->
+
+        <!-- footer -->
+        <common-footer></common-footer>
+        <!-- end footer -->
+
     </div>
-    
-    <div class="footer">
-        <p>&copy KMB Telematics Inc. <a href="">Terms of Use</a>. <a href="">Privacy Policy</a>.</p>
-    </div>
-
-
-  <script src="jquery-3.6.0.min.js"></script>
-  <script src="morphext.js"></script>
-  <!-- <script src="app.js" defer></script> -->
-  <script>
-      $("#js-rotating").Morphext({
-        // The [in] animation type. Refer to Animate.css for a list of available animations.
-        animation: "fadeIn",
-        // An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
-        separator: ",",
-        // The delay between the changing of each phrase in milliseconds.
-        speed: 3000,
-        complete: function () {
-            // Called after the entrance animation is executed.
-        }
-    });
-  </script>
+    <scroll-up></scroll-up>
+    <!-- javascript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.fancybox.pack.js"></script>
+    <script src="/js/jquery.fancybox-media.js"></script>
+    <script src="/js/portfolio/jquery.quicksand.js"></script>
+    <script src="/js/portfolio/setting.js"></script>
+    <script src="/js/jquery.flexslider.js"></script>
+    <script src="/js/animate.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/owl-carousel/owl.carousel.js"></script>
+    <script src="/js/morphext.js"></script>
+    <script type=module src="/js/main.js"></script>
+    <script type=module src="/js/formhandlers.js"></script>
+    <script defer data-domain="kmb.ac" src="https://plausible.io/js/plausible.js"></script>
+    <script>
+        $("#js-rotating").Morphext({
+            animation: "fadeIn",
+            separator: ",",
+            speed: 3000,
+            complete: function () {
+                // Called after the entrance animation is executed.
+            }
+        });
+    </script>
 </body>
+
 </html>
