@@ -118,7 +118,7 @@
 				var text = $p.text();
 				var shortString = text.substring(0, 197); 
 				shortString = shortString.substring(0, Math.min(shortString.length, shortString.lastIndexOf(" "))) 
-				shortString += '<a href="/subpages/' + param + '.html"> [...]</a>';
+				shortString += ' <a href="/subpages/' + param + '.html">[...]</a>';
 				$p.html(shortString);
 			});
 		};
