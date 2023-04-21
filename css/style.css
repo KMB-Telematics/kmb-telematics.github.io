@@ -1819,7 +1819,8 @@ article .align-right {
     height: auto;
     margin: auto;
     display: block;
-    max-width: 245px;
+    width: 245px;
+    max-width: 120%;
     padding-top: 15%;
     padding-bottom: 15%;
 }
@@ -1829,7 +1830,8 @@ article .align-right {
     height: auto;
     margin: auto;
     display: block;
-    max-width: 200px;
+    width: 200px;
+    max-width: 100%;
     padding-top: 15%;
     padding-bottom: 15%;
 }
