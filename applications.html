@@ -48,9 +48,7 @@
 
 					<blog-post src="/subpages/drone-on-the-move.html"></blog-post>
 				</div>
-					
 				<div class="row service-v1 margin-bottom-40">
-
 					<blog-post src="/subpages/aps.html"></blog-post>
 
 					<blog-post src="/subpages/daa-radar.html"></blog-post>
@@ -118,7 +116,9 @@
 			$('.blog-snippet#snippet-' + param).load('/subpages/' + param + '.html #blog-text', function () {
 				var $p = $(this);
 				var text = $p.text();
-				var shortString = text.substring(0, 200) + '<a href="/subpages/' + param + '.html">[...]</a>';
+				var shortString = text.substring(0, 197); 
+				shortString = shortString.substring(0, Math.min(shortString.length, shortString.lastIndexOf(" "))) 
+				shortString += '<a href="/subpages/' + param + '.html"> [...]</a>';
 				$p.html(shortString);
 			});
 		};
