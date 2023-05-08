@@ -139,8 +139,8 @@ class CommonFooter extends HTMLElement {
                             <h5 class="widgetheading">Our Contact</h5>
                             <address>
                                 <strong>KMB Telematics Inc.</strong><br>
-                                2111 Wilson Blvd., Suite 700<br>
-                                Arlington, VA 22201
+                                1601 Connecticut Ave NW, Suite 301<br>
+                                Washington DC 20009
                             </address>
                             <p>
                                 <i class="icon-phone"></i>
