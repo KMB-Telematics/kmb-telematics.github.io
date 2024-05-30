@@ -136,7 +136,7 @@ class CommonFooter extends HTMLElement {
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="widget">
-                            <h5 class="widgetheading">Our Contact</h5>
+                            <h5 class="widgetheading">Contact Us</h5>
                             <address>
                                 <strong>KMB Telematics Inc.</strong><br>
                                 2111 Wilson Blvd., Suite 700<br>

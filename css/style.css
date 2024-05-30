@@ -1896,6 +1896,19 @@ article .align-right {
     padding-right: 15px;
 }
 
+.partner-diu {
+    /* height: 65%; */
+    height: auto;
+    margin: auto;
+    display: block;
+    width: 345px;
+    max-width: 100%;
+    padding-top: 23%;
+    padding-bottom: 23%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 @media only screen and (max-width: 700px) {
     .partner-nasa {
         width: 122px;
