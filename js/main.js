@@ -121,7 +121,7 @@ customElements.define('inner-header', InnerHeader);
 // Scroll UP
 class ScrollUp extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `<a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>`;
+        this.innerHTML = `<a href="#" class="scrollup"><i class="fa-solid fa-angle-up active"></i></a>`;
     }
 }
 customElements.define('scroll-up', ScrollUp);
@@ -139,8 +139,8 @@ class CommonFooter extends HTMLElement {
                             <h5 class="widgetheading">Contact Us</h5>
                             <address>
                                 <strong>KMB Telematics Inc.</strong><br>
-                                2111 Wilson Blvd., Suite 700<br>
-                                Arlington, VA 22201
+                                1601 Connecticut Ave NW, Suite 301<br>
+                                Washington DC 20009
                             </address>
                             <p>
                                 <i class="icon-phone"></i>
@@ -202,10 +202,10 @@ class CommonFooter extends HTMLElement {
                         </div>
                         <div class="col-lg-6">
                             <ul class="social-network">
-                                <li><a href="https://twitter.com/KmbTelematics" data-placement="top" title="Twitter"
-                                        target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://x.com/KmbTelematics" data-placement="top" title="Twitter"
+                                        target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
                                 <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/" data-placement="top"
-                                        title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                        title="Linkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
                             </ul>
                         </div>
                     </div>

@@ -4,7 +4,9 @@ Note: Licence under Creative Commons Attribution 3.0
 -------------------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&family=Play:wght@400;700&display=swap');
-@import url('font-awesome.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css');
 @import url('animate.css');
 
 :root {
@@ -422,7 +424,7 @@ select.selectmenu {
     color: #FFF;
     /* letter-spacing: 1px; */
     text-transform: uppercase;
-    font-size: 45px;
+    font-size: 60px;
     margin-top: 20px;
     margin-bottom: 8px;
     margin-block-start: 1em;
@@ -450,7 +452,7 @@ select.selectmenu {
         bottom: 10px
     }
     .flex-caption .flex-custom-text-line-1 {
-        font-size: 16px;
+        font-size: 18px;
     }
     .flex-caption .flex-custom-text-line-2 {
         font-size: 14px;
