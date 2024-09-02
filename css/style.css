@@ -1872,6 +1872,19 @@ article .align-right {
 }
 
 
+.branding-accents {
+    /* height: 60%; */
+    height: auto;
+    margin: auto;
+    display: block;
+    /* width: 245px; */
+    max-width: 70%;
+    padding-top: 15px;
+    padding-bottom: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .partner-nasa {
     /* height: 80%; */
     height: auto;
