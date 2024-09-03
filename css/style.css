@@ -1929,12 +1929,14 @@ article .align-right {
         height: 100%;
         padding-top: 10%;
         padding-bottom: 10%;
+        padding-left: 20px;
     }
     .partner-diu {
         max-height: 130px;
         height: 100%;
         padding-top: 10%;
         padding-bottom: 10%;
+        padding-left: 20px;
     }
     .aligncenter{
         font-size: 14pt;
