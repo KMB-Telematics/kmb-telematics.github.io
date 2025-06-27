@@ -1880,6 +1880,11 @@ article .align-right {
     margin: auto;
     display: block;
     padding-top: 25px;
+    border-bottom: 2px solid var(--kmb-color);
+}
+
+.banner-text {
+    padding-left: 50px;
 }
 
 .branding-accents {
@@ -1948,9 +1953,9 @@ article .align-right {
         padding-left: 20px;
     }
     .partner-nato {
-        max-height: 130px;
+        max-height: 100px;
         height: 100%;
-        padding-top: 10%;
+        padding-top: 15%;
         padding-bottom: 10%;
         padding-left: 20px;
     }
@@ -1963,6 +1968,9 @@ article .align-right {
     }
     .aligncenter{
         font-size: 14pt;
+    }
+    .banner-news {
+        max-width: 100%;
     }
 }
 
@@ -2344,21 +2352,6 @@ hr.center-ball:before {
 .modal-content h3 {
     font-size: .8em;
     letter-spacing: 2px;
-}
-
-.row-flex {
-  display: flex;
-}
-
-.column-text {
-    flex: 70%;
-    padding: 10px;
-    padding-bottom: 25px;
-}
-.column-img {
-    flex: 30%;
-    padding: 10px;
-    padding-bottom: 25px;
 }
 
 .modal-body label {
