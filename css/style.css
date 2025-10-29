@@ -570,6 +570,10 @@ img.img-center {
     max-width: 100%;
 }
 
+.carousel {
+    max-width: 550px;
+}
+
 /* Testimonial
 ----------------------------------*/
 
@@ -2224,6 +2228,18 @@ article .align-right {
     background-color: var(--kmb-color);
 }
 
+i.fa-solid.fa-angle-left::before {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+i.fa-solid.fa-angle-right::before {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
 video.center {
     display: block;
     margin-left: auto;
@@ -2235,6 +2251,7 @@ video.center {
     margin: 0 0;
     font-size: 0.8em;
     min-width: 400px;
+    margin-bottom: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
