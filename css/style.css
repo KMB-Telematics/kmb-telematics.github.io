@@ -847,7 +847,7 @@ select.error {
 }
 
 select.form-control {
-    padding: 20pt;
+    padding-left: 20pt;
 }
 
 /*-------Subscribe---------*/
