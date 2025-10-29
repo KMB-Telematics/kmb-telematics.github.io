@@ -71,7 +71,7 @@ async function submitContactForm(e, form) {
         // 2.3 Build Headers
         const headers = buildHeaders();
         // 2.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://ofnd4nga7uofutkcjqala6wcni0xvixy.lambda-url.us-east-2.on.aws/contact`, headers, jsonFormData); // Uses JSON Placeholder
+        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/contact`, headers, jsonFormData); // Uses JSON Placeholder
         if (response == 'OK') {
             document.getElementById('contact-done').style.display = 'block';
             form.name.value = '';
@@ -128,7 +128,7 @@ async function submitSubscribeForm(e, form) {
         // 2.3 Build Headers
         const headers = buildHeaders();
         // 2.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://ofnd4nga7uofutkcjqala6wcni0xvixy.lambda-url.us-east-2.on.aws/subscribe`, headers, jsonFormData); // Uses JSON Placeholder
+        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/subscribe`, headers, jsonFormData); // Uses JSON Placeholder
         if (response == 'OK') {
             document.getElementById('subscribe-done').style.display = 'block';
             form.email.value = '';
@@ -191,7 +191,7 @@ async function submitDownloadForm(e, form) {
         // 3.3 Build Headers
         const headers = buildHeaders();
         // 3.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://ofnd4nga7uofutkcjqala6wcni0xvixy.lambda-url.us-east-2.on.aws/download`, headers, jsonFormData); // Uses JSON Placeholder
+        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/download`, headers, jsonFormData); // Uses JSON Placeholder
         if (response == 'OK') {
             // 3.4.1 Click on the hidden button
             form.elements["hidden-button"].click();
