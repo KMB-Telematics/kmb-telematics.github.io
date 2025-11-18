@@ -130,6 +130,20 @@ async function submitSubscribeForm(e, form) {
         // 2.4 Request & Response
         const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/subscribe`, headers, jsonFormData); // Uses JSON Placeholder
         if (response == 'OK') {
+            // ------------------------------------------------------
+            // This part is for Mattermost webhook
+            const mattermostWebhookUrl = "https://chat.kmb.ac/hooks/hps8tx3seibr3jnrh6kyoqcetc";
+
+            const mmMessage = {
+                text: `📬 **New newsletter signup**\nEmail: ${email.value}`
+            };
+
+            await fetch(mattermostWebhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(mmMessage)
+            });
+            // ------------------------------------------------------
             document.getElementById('subscribe-done').style.display = 'block';
             form.email.value = '';
         }
