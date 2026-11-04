@@ -1,0 +1,13 @@
+{
+  "name": "kmb-website",
+  "private": true,
+  "type": "module",
+  "description": "Tooling only. The published site is plain static files.",
+  "scripts": {
+    "serve": "node tests/server.mjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

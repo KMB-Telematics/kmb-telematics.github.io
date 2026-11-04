@@ -1,0 +1,276 @@
+import { test, expect, API } from './helpers.mjs';
+
+// Public URLs. These must keep working after any reorganization.
+const NAV_PAGES = ['index', 'technology', 'applications', 'products', 'resources', 'contact'];
+const APPLICATIONS = ['counter-uas', 'drone-stationary', 'drone-hovering', 'drone-on-the-move', 'aps', 'daa-radar', 'bvlos-ops', 'part-107-waivers'];
+const PRODUCTS = ['kmb-product-counter-uas-radar', 'kmb-product-daa-radar'];
+const LEGAL = ['privacy-policy', 'terms-and-conditions'];
+const ALL_PAGES = [
+  ...NAV_PAGES.map((p) => `/${p}.html`),
+  ...[...APPLICATIONS, ...PRODUCTS, ...LEGAL].map((p) => `/subpages/${p}.html`),
+];
+
+const BROCHURES = [
+  ['/subpages/kmb-product-counter-uas-radar.html', 'cuas', /KMB(%20| )Software(%20| )Defined(%20| )Radar,(%20| )cUAS\.pdf$/],
+  ['/subpages/kmb-product-daa-radar.html', 'daa', /KMB(%20| )Software(%20| )Defined(%20| )Radar,(%20| )Airborne(%20| )DAA\.pdf$/],
+];
+
+const settle = async (page) => { await page.waitForLoadState('load'); await page.evaluate(() => document.fonts.ready); };
+
+test.describe('every public page', () => {
+  for (const url of ALL_PAGES) {
+    test(`${url} renders with shared layout and no broken local assets`, async ({ page, site }) => {
+      const resp = await page.goto(url);
+      expect(resp.status()).toBe(200);
+      await settle(page);
+      await expect(page.locator('common-header header')).toHaveCount(1);
+      await expect(page.locator('common-header .navbar-nav li a')).toHaveCount(6);
+      await expect(page.locator('common-footer footer')).toHaveCount(1);
+      await expect(page.locator('#subscribe-form')).toHaveCount(1);
+      const brokenImages = await page.$$eval('img', (imgs) =>
+        imgs.filter((i) => i.getAttribute('src') && i.complete && i.naturalWidth === 0 && i.src.startsWith(location.origin)).map((i) => i.src));
+      expect(brokenImages).toEqual([]);
+      expect(site.localFailures).toEqual([]);
+      expect(site.pageErrors).toEqual([]);
+    });
+  }
+
+  test('all same-site links and media on all pages resolve', async ({ page, site, request, baseURL }) => {
+    test.setTimeout(120_000);
+    const targets = new Set();
+    for (const url of ALL_PAGES) {
+      await page.goto(url);
+      await settle(page);
+      const found = await page.$$eval('a[href], source[src], img[src], link[href], script[src]', (els) =>
+        els.map((e) => e.href || e.src).filter((u) => u && u.startsWith(location.origin)));
+      found.forEach((u) => targets.add(u.split('#')[0]));
+    }
+    const bad = [];
+    for (const u of targets) {
+      const r = await request.head(u);
+      if (r.status() !== 200) bad.push(`${r.status()} ${u}`);
+    }
+    expect(bad).toEqual([]);
+    expect(targets.size).toBeGreaterThan(40);
+  });
+
+  test('anchors used between pages exist', async ({ page }) => {
+    await page.goto('/index.html');
+    await expect(page.locator('#zero-doppler-video')).toHaveCount(1);
+    await page.goto('/technology.html');
+    await expect(page.locator('#zero-doppler')).toHaveCount(1);
+  });
+
+  test('manifest and favicon load', async ({ page, request }) => {
+    await page.goto('/index.html');
+    const href = await page.locator('link[rel=manifest]').evaluate((l) => l.href);
+    const manifest = await (await request.get(href)).json();
+    for (const icon of manifest.icons) {
+      expect((await request.head(new URL(icon.src, href).href)).status()).toBe(200);
+    }
+    const icon = await page.locator('link[rel=icon][sizes="32x32"]').evaluate((l) => l.href);
+    expect((await request.head(icon)).status()).toBe(200);
+  });
+});
+
+test.describe('home page', () => {
+  test('headline rotates, slider starts, video and partners are present', async ({ page, request, site }) => {
+    await page.goto('/index.html');
+    const rotating = page.locator('#js-rotating');
+    const first = await rotating.innerText();
+    await expect(rotating).not.toHaveText(first, { timeout: 8000 });
+    await expect(page.locator('#main-slider.flexslider .slides li').first()).toBeVisible();
+    const video = await page.locator('video source').evaluate((s) => s.src);
+    expect((await request.head(video)).status()).toBe(200);
+    await expect(page.locator('img.partner-nasa, img.partner-army, img.partner-nato')).toHaveCount(3);
+    await expect(page.locator('common-header li.active a')).toHaveText('Home');
+    expect(site.pageErrors).toEqual([]);
+  });
+});
+
+test.describe('card pages built from subpages', () => {
+  test('Applications shows a cover, title and snippet for all 8 pages', async ({ page }) => {
+    await page.goto('/applications.html');
+    for (const name of APPLICATIONS) {
+      await expect(page.locator(`#cover-${name} img`)).toHaveCount(1);
+      await expect(page.locator(`#title-${name}`)).not.toBeEmpty();
+      await expect(page.locator(`#snippet-${name}`)).toContainText('[...]');
+      await expect(page.locator(`#${name} a`).first()).toHaveAttribute('href', `/subpages/${name}.html`);
+    }
+    await expect(page.locator('common-header li.active a')).toHaveText('Applications');
+  });
+
+  test('Products shows a cover and title for both radars', async ({ page }) => {
+    await page.goto('/products.html');
+    for (const name of PRODUCTS) {
+      await expect(page.locator(`#cover-${name} img`)).toHaveCount(1);
+      await expect(page.locator(`#title-${name}`)).not.toBeEmpty();
+    }
+  });
+
+  test('breadcrumb links back to the parent page', async ({ page }) => {
+    await page.goto('/subpages/counter-uas.html');
+    await expect(page.locator('blog-address a[href="/applications.html"]')).toHaveCount(1);
+    await page.goto('/subpages/kmb-product-daa-radar.html');
+    await expect(page.locator('blog-address a[href="/products.html"]')).toHaveCount(1);
+  });
+});
+
+test.describe('product pages', () => {
+  test('carousel advances with its next control', async ({ page }) => {
+    await page.goto('/subpages/kmb-product-counter-uas-radar.html');
+    await settle(page);
+    const active = page.locator('#carousel-cuas .item.active img');
+    const before = await active.getAttribute('src');
+    await page.locator('#carousel-cuas .carousel-control.right').click();
+    await expect(active).not.toHaveAttribute('src', before);
+  });
+
+  for (const [url, item, pdf] of BROCHURES) {
+    test(`${item} brochure: modal, API record, then PDF opens`, async ({ page, site, request }) => {
+      // Record the PDF the page asks to open, rather than depending on the headless PDF viewer.
+      await page.addInitScript(() => { window.__opened = []; window.open = (u) => { window.__opened.push(u); return {}; }; });
+      await page.goto(url);
+      await settle(page);
+      await page.locator(`[data-target="#popupModal-${item}"]`).click();
+      const modal = page.locator(`#popupModal-${item}`);
+      await expect(modal).toBeVisible();
+      const form = modal.locator('form');
+
+      await form.locator('input[name=submit]').click();
+      await expect(form.locator('input[name=name]')).toHaveClass(/error/);
+      expect(site.posts).toEqual([]);
+
+      await form.locator('input[name=name]').fill('Test User');
+      await form.locator('input[name=email]').fill('test@example.com');
+      await form.locator('input[name=company]').fill('Acme');
+      await form.locator('input[name=jobtitle]').fill('Engineer');
+      await form.locator('input[name=phone]').fill('+1 703-555-0100');
+      await form.locator('input[name=submit]').click();
+      await expect.poll(() => page.evaluate(() => window.__opened.length)).toBe(1);
+      const opened = await page.evaluate(() => new URL(window.__opened[0], location.href).href);
+      expect(opened).toMatch(pdf);
+      expect((await request.get(opened)).status()).toBe(200);
+      expect(site.posts).toEqual([{ path: '/download', body: {
+        'From Web: Name': 'Test User',
+        'From Web: Email': 'test@example.com',
+        'From Web: Employer': 'Acme',
+        'From Web: Job Title': 'Engineer',
+        'From Web: Telephone': '+1 703-555-0100',
+      } }]);
+      await expect(modal).toBeHidden();
+    });
+  }
+
+  test('Get Quote pre-selects the subject on the contact page', async ({ page }) => {
+    await page.goto('/subpages/kmb-product-counter-uas-radar.html');
+    await expect(page.locator('a[href^="/contact.html?subject=Price"]')).toHaveCount(1);
+    await page.goto('/contact.html?subject=Price%20and%20quotation');
+    await expect(page.locator('#subject')).toHaveValue('Price and quotation');
+  });
+});
+
+test.describe('contact form', () => {
+  test('blocks empty submissions and highlights fields', async ({ page, site }) => {
+    await page.goto('/contact.html');
+    await page.locator('#contact-submit').click();
+    await expect(page.locator('#contact-form input[name=name]')).toHaveClass(/error/);
+    await expect(page.locator('#contact-form input[name=email]')).toHaveClass(/error/);
+    await expect(page.locator('#subject')).toHaveClass(/error/);
+    await expect(page.locator('#contact-form textarea[name=message]')).toHaveClass(/error/);
+    expect(site.posts).toEqual([]);
+  });
+
+  test('sends the expected record and confirms', async ({ page, site }) => {
+    await page.goto('/contact.html');
+    await page.locator('#contact-form input[name=name]').fill('Test User');
+    await page.locator('#contact-form input[name=email]').fill('test@example.com');
+    await page.locator('#subject').selectOption('Product inquiry');
+    await page.locator('#contact-form textarea[name=message]').fill('Hello');
+    await page.locator('#contact-submit').click();
+    await expect(page.locator('#contact-done')).toBeVisible();
+    expect(site.posts).toEqual([{ path: '/contact', body: {
+      'From Web: Name': 'Test User',
+      'From Web: Email': 'test@example.com',
+      'From Web: Subject': 'Product inquiry',
+      'From Web: Message': 'Hello',
+    } }]);
+    await expect(page.locator('#contact-form input[name=name]')).toHaveValue('');
+  });
+
+  test('"Others" reveals a free-text subject that replaces the subject sent', async ({ page, site }) => {
+    await page.goto('/contact.html');
+    await page.locator('#contact-form input[name=name]').fill('Test User');
+    await page.locator('#contact-form input[name=email]').fill('test@example.com');
+    await page.locator('#subject').selectOption('others');
+    await page.locator('#othersubject').fill('Partnership');
+    await page.locator('#contact-form textarea[name=message]').fill('Hello');
+    await page.locator('#contact-submit').click();
+    await expect(page.locator('#contact-done')).toBeVisible();
+    expect(site.posts[0].body['From Web: Subject']).toBe('Partnership');
+  });
+
+  test('shows the map', async ({ page }) => {
+    await page.goto('/contact.html');
+    await expect(page.locator('.map-responsive iframe')).toHaveAttribute('src', /google\.com\/maps\/embed/);
+  });
+});
+
+test.describe('subscribe form', () => {
+  test('rejects a bad address, then subscribes', async ({ page, site }) => {
+    await page.goto('/technology.html');
+    const email = page.locator('#subscribe-form input[name=email]');
+    await page.locator('#subscribe-submit').click();
+    await expect(email).toHaveClass(/error/);
+    expect(site.posts).toEqual([]);
+    await email.fill('test@example.com');
+    await page.locator('#subscribe-submit').click();
+    await expect(page.locator('#subscribe-done')).toBeVisible();
+    expect(site.posts).toEqual([{ path: '/subscribe', body: { 'From Web: Email': 'test@example.com' } }]);
+  });
+});
+
+test.describe('placeholder login', () => {
+  test('never sends credentials anywhere and reports a failed match', async ({ page, site }) => {
+    await page.goto('/resources.html');
+    await page.locator('#login-form input[name=username]').fill('someone');
+    await page.locator('#login-form input[name=password]').fill('not-a-real-password');
+    const messages = [];
+    page.on('dialog', async (d) => { messages.push(d.message()); await d.accept(); });
+    await page.locator('#login-submit').click();
+    await expect.poll(() => messages.length).toBe(1);
+    expect(messages[0]).toContain("didn't match");
+    expect(site.posts).toEqual([]);
+    await expect(page.locator('#login-form input[name=password]')).toHaveValue('');
+  });
+});
+
+test.describe('layout behaviour', () => {
+  test('footer contact links carry the phone and email', async ({ page }) => {
+    await page.goto('/technology.html');
+    await expect(page.locator('.cryptedphone')).toHaveAttribute('data-telnumber', '783');
+    await expect(page.locator('.cryptedmail')).toHaveAttribute('data-emaildomain', 'kmb');
+  });
+
+  test('scroll-to-top appears and returns to the top', async ({ page }) => {
+    await page.goto('/technology.html');
+    await settle(page);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    const up = page.locator('.scrollup');
+    await expect(up).toBeVisible();
+    await up.click();
+    await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 4000 }).toBe(0);
+  });
+
+  test('mobile menu opens and links navigate', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 700 });
+    await page.goto('/index.html');
+    await settle(page);
+    const link = page.locator('common-header .navbar-nav a[href="/contact.html"]');
+    await expect(link).toBeHidden();
+    await page.locator('.navbar-toggle').click();
+    await expect(link).toBeVisible();
+    await link.click();
+    await expect(page).toHaveURL(/contact\.html$/);
+  });
+});
