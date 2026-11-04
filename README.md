@@ -33,7 +33,7 @@ Tests block third-party requests and mock the form API, so they never create rea
 
 ## Things that are easy to break
 
-- **Form field names:** `buildJsonFormData` in `docs/assets/js/formhandlers.js` defines the names the backend receives.
+- **Form field names:** `API_FIELD_NAMES` in `docs/assets/js/formhandlers.js` defines the names the backend receives.
 - **Card pages:** `applications.html` and `products.html` load `#blog-img`, `#blog-header` and `#blog-text` from each subpage, using `/subpages/` paths.
 - **Download buttons:** `data-target="#popupModal-<item>"` must match `thisitem` on `<common-download-form>`.
 - **Public URLs:** Pages has no server-side redirects, so a moved page needs a redirect stub at its old URL.

@@ -50,15 +50,15 @@
 							<form id="contact-form" class="contact">
 								<div class="form-group has-feedback">
 									<label for="name">Name*</label>
-									<input type="text" class="form-control" name="name" placeholder="Your name">
+									<input type="text" class="form-control" id="name" name="name" placeholder="Your name">
 								</div>
 								<div class="form-group has-feedback">
 									<label for="email">Email*</label>
-									<input type="email" class="form-control" name="email" placeholder="Your email">
+									<input type="email" class="form-control" id="email" name="email" placeholder="Your email">
 								</div>
 								<div class="form-group has-feedback">
 									<label for="subject">Subject*</label>
-									<select class="form-control" name="subject" id="subject" onchange="showField(this.options[this.selectedIndex].value);">
+									<select class="form-control" name="subject" id="subject">
 										<option value="default">Choose a subject</option>
 										<option value="General inquiry">General inquiry</option>
 										<option value="Price and quotation">Price and quotation</option>
@@ -71,7 +71,7 @@
 								<div class="form-group has-feedback" id="other-subject"></div>
 								<div class="form-group has-feedback">
 									<label for="message">Message*</label>
-									<textarea class="form-control" rows="6" name="message" placeholder="Your detailed message"></textarea>
+									<textarea class="form-control" id="message" rows="6" name="message" placeholder="Your detailed message"></textarea>
 								</div>
 								<input type="submit" value="Submit" id="contact-submit" class="submit btn btn-default">
 							</form>
@@ -111,26 +111,6 @@
 	<script src="/assets/js/custom.js"></script>
 	<script type=module src="/assets/js/main.js"></script>
 	<script type=module src="/assets/js/formhandlers.js"></script>
-	<script type="text/javascript">
-		function showField(name){
-			if(name == 'others') {
-				document.getElementById('other-subject').innerHTML = `<input type="text" class="form-control" name="othersubject" id="othersubject" placeholder="Please specify subject"/>`;
-			}
-			else {
-				document.getElementById('other-subject').innerHTML = ``;
-			}	
-		}
-	</script>
-	<script>
-		const foundParams = window.location.search;
-		if (foundParams != '') {
-			const hashParams = foundParams.substr(1).split('&');
-			for(var i = 0; i < hashParams.length; i++){
-				var p = hashParams[i].split('=');
-				document.getElementById(p[0]).value = decodeURIComponent(p[1]);
-			}
-		}
-	</script>
 </body>
 
 </html>

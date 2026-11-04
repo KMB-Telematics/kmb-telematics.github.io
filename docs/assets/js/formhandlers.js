@@ -1,324 +1,204 @@
 import FetchService from './service/FetchService.js';
 
-/*-- Objects --*/
+const API_BASE = 'https://k0kivb28mf.execute-api.us-east-2.amazonaws.com';
 const fetchService = new FetchService();
-/*-- /Objects --*/
 
-/*-- RegEx --*/
-let regex_email = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-let regex_phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
-/*-- /RegEx --*/
+const REGEX_EMAIL = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+const REGEX_PHONE = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
 
-/*--Functions--*/
-async function submitContactForm(e, form) {
-    // 1. Prevent reloading page
-    e.preventDefault();
+// Field names the backend expects. Changing these changes the stored records.
+// "othersubject" follows "subject" in the form, so it replaces "others" when present.
+const API_FIELD_NAMES = {
+    name: 'From Web: Name',
+    email: 'From Web: Email',
+    subject: 'From Web: Subject',
+    othersubject: 'From Web: Subject',
+    message: 'From Web: Message',
+    company: 'From Web: Employer',
+    jobtitle: 'From Web: Job Title',
+    phone: 'From Web: Telephone',
+};
 
-    var returnError = false;
+const isBlank = (field) => field.value.trim() === '';
+const isBadEmail = (field) => !REGEX_EMAIL.test(field.value.trim());
 
-    // 2. Validate the form
-    var name = form.name;
-    var email = form.email;
-    var subject = form.subject;
-    var comment = form.message;
-
-    //Simple validation to make sure user entered something
-    //If error found, add hightlight class to the text field
-    if (name.value == '') {
-        name.classList.add('error');
-        returnError = true;
-    } else name.classList.remove('error');
-
-    if (email.value == '') {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    if (!regex_email.test(email.value)) {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    if (subject.value == 'default') {
-        subject.classList.add('error');
-        returnError = true;
-    } else if (subject.value == 'others') {
-        var othersubject = form.othersubject;
-        if (othersubject.value == '') {
-            othersubject.classList.add('error');
-            returnError = true;
-        } else othersubject.classList.remove('error');
-    } else subject.classList.remove('error');
-
-    if (comment.value == '') {
-        comment.classList.add('error');
-        returnError = true;
-    } else comment.classList.remove('error');
-
-    // Highlight all error fields, then quit.
-    if (returnError == true) {
-        return false;
+// Takes [field, isInvalid] pairs, highlights the invalid ones and reports whether all passed.
+function validate(checks) {
+    let allValid = true;
+    for (const [field, isInvalid] of checks) {
+        field.classList.toggle('error', isInvalid);
+        if (isInvalid) allValid = false;
     }
-
-    try {
-        // 2. Submit the form
-        // 2.1 User Interaction
-        const btnSubmit = document.getElementById('contact-submit');
-        btnSubmit.disabled = true;
-        setTimeout(() => btnSubmit.disabled = false, 2000);
-        // 2.2 Build JSON body
-        const jsonFormData = buildJsonFormData(form);
-        // 2.3 Build Headers
-        const headers = buildHeaders();
-        // 2.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/contact`, headers, jsonFormData); // Uses JSON Placeholder
-        if (response == 'OK') {
-            document.getElementById('contact-done').style.display = 'block';
-            form.name.value = '';
-            form.email.value = '';
-            if (form.subject.value == 'others') {
-                form.othersubject.value = '';
-                document.getElementById('other-subject').style.display = 'none';
-            }
-            form.subject.value = 'default';
-            form.message.value = '';
-        }
-    }
-    catch (err) {
-        console.error(`Error at submission: ${err}`);
-        alert(`Sorry, unexpected error. Please try again later.`);
-    }
-}
-
-async function submitSubscribeForm(e, form) {
-    // 1. Prevent reloading page
-    e.preventDefault();
-
-    var returnError = false;
-
-    // 2. Validate the form
-    var email = form.email;
-
-
-    //Simple validation to make sure user entered something
-    //If error found, add hightlight class to the text field
-    if (email.value == '') {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    if (!regex_email.test(email.value)) {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    // Highlight all error fields, then quit.
-    if (returnError == true) {
-        return false;
-    }
-
-    try {
-        // 2. Submit the form
-        // 2.1 User Interaction
-        const btnSubmit = document.getElementById('subscribe-submit');
-        btnSubmit.disabled = true;
-        setTimeout(() => btnSubmit.disabled = false, 2000);
-        // 2.2 Build JSON body
-        const jsonFormData = buildJsonFormData(form);
-        // 2.3 Build Headers
-        const headers = buildHeaders();
-        // 2.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/subscribe`, headers, jsonFormData); // Uses JSON Placeholder
-        if (response == 'OK') {
-            document.getElementById('subscribe-done').style.display = 'block';
-            form.email.value = '';
-        }
-    }
-    catch (err) {
-        console.error(`Error at submission: ${err}`);
-        alert(`Sorry, unexpected error. Please try again later.`);
-    }
-}
-
-async function submitDownloadForm(e, form) {
-    // 1. Prevent reloading page
-    e.preventDefault();
-
-    var returnError = false;
-
-    // 2. Validate the form
-    var name = form.name;
-    var email = form.email;
-    var company = form.company;
-    var jobTitle = form.jobtitle;
-    var phone = form.phone;
-
-    //2.1 Simple validation to make sure user entered something
-    //If error found, add hightlight class to the text field
-    if (name.value == '') {
-        name.classList.add('error');
-        returnError = true;
-    } else name.classList.remove('error');
-
-    if (email.value == '') {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    if (!regex_email.test(email.value)) {
-        email.classList.add('error');
-        returnError = true;
-    } else email.classList.remove('error');
-
-    if (phone.value != '' && !regex_phone.test(phone.value)) {
-        phone.classList.add('error');
-        returnError = true;
-    } else phone.classList.remove('error');
-
-    // 2.2 Highlight all error fields, then quit.
-    if (returnError == true) {
-        return false;
-    }
-
-    try {
-        // 3. Submit the form
-        // 3.1 User Interaction
-        const btnSubmit = form.elements["submit"];
-        btnSubmit.disabled = true;
-        setTimeout(() => btnSubmit.disabled = false, 2000);
-        // 3.2 Build JSON body
-        const jsonFormData = buildJsonFormData(form);
-        // 3.3 Build Headers
-        const headers = buildHeaders();
-        // 3.4 Request & Response
-        const response = await fetchService.performPostHttpRequest(`https://k0kivb28mf.execute-api.us-east-2.amazonaws.com/download`, headers, jsonFormData); // Uses JSON Placeholder
-        if (response == 'OK') {
-            // 3.4.1 Click on the hidden button
-            form.elements["hidden-button"].click();
-            // 3.4.2 Clear all the fields
-            form.name.value = '';
-            form.email.value = '';
-            form.company.value = '';
-            form.jobtitle.value = '';
-            form.phone.value = '';
-            // 3.4.3 Hide the modal window
-            $(".modal").modal("hide");
-        }
-    }
-    catch (err) {
-        console.error(`Error at submission: ${err}`);
-        alert(`Sorry, unexpected error. Please try again later.`);
-    }
-}
-
-async function submitLoginForm(e, form) {
-    // 1. Prevent reloading page
-    e.preventDefault();
-
-    var returnError = false;
-
-    // 2. Validate the form
-    var uname = form.username;
-    var upass = form.password;
-
-
-    //Simple validation to make sure user entered something
-    //If error found, add hightlight class to the text field
-    if (uname.value == '') {
-        uname.classList.add('error');
-        returnError = true;
-    } else uname.classList.remove('error');
-
-    if (upass.value == '') {
-        upass.classList.add('error');
-        returnError = true;
-    } else upass.classList.remove('error');
-
-    // Highlight all error fields, then quit.
-    if (returnError == true) {
-        return false;
-    }
-
-    try {
-        // 3. Submit the form
-        // 3.1 User Interaction
-        const btnSubmit = document.getElementById('login-submit');
-        btnSubmit.disabled = true;
-        setTimeout(() => btnSubmit.disabled = false, 2000);
-        form.username.value = '';
-        form.password.value = '';
-        alert(`Username and/or Password didn't match`);
-    }
-    catch (err) {
-        console.error(`Error at login: ${err}`);
-        alert(`Sorry, unexpected error. Please try again later.`);
-    }
-}
-
-function buildHeaders() {
-    const headers = {
-        "Content-Type": "application/json",
-    };
-    return headers;
+    return allValid;
 }
 
 function buildJsonFormData(form) {
     const jsonFormData = {};
-    var colKey = ''
-    for (const pair of new FormData(form)) {
-        if (pair[0] == 'name')
-            colKey = 'From Web: Name';
-        else if (pair[0] == 'email')
-            colKey = 'From Web: Email';
-        else if (pair[0] == 'subject')
-            colKey = 'From Web: Subject';
-        else if (pair[0] == 'othersubject')
-            colKey = 'From Web: Subject';
-        else if (pair[0] == 'message')
-            colKey = 'From Web: Message';
-        else if (pair[0] == 'company')
-            colKey = 'From Web: Employer';
-        else if (pair[0] == 'jobtitle')
-            colKey = 'From Web: Job Title';
-        else if (pair[0] == 'phone')
-            colKey = 'From Web: Telephone';
-        else
-            console.error(`Error in building JSON: ${pair[0]} not found.`)
-        jsonFormData[colKey] = pair[1];
+    for (const [name, value] of new FormData(form)) {
+        const apiName = API_FIELD_NAMES[name];
+        if (apiName) {
+            jsonFormData[apiName] = value.trim();
+        } else {
+            console.error(`Error in building JSON: ${name} not found.`);
+        }
     }
     return jsonFormData;
 }
-/*--/Functions--*/
 
-/*--Event Listeners--*/
-const contactForm = document.querySelector("#contact-form");
-if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-        submitContactForm(e, this);
-    });
-}
-
-const subscribeForm = document.querySelector("#subscribe-form");
-if (subscribeForm) {
-    subscribeForm.addEventListener("submit", function (e) {
-        submitSubscribeForm(e, this);
-    });
-}
-
-const downloadForms = document.querySelectorAll(".download-form");
-for (let i = 0; i < downloadForms.length; i++) {
-    let downloadForm = downloadForms[i]
-    if (downloadForm) {
-        downloadForm.addEventListener("submit", function (e) {
-            submitDownloadForm(e, this);
-        });
+// Posts the form and returns true on success. On failure the user is told and
+// their input is left in place so they can try again.
+async function send(path, form, submitButton) {
+    submitButton.disabled = true;
+    try {
+        const response = await fetchService.performPostHttpRequest(
+            `${API_BASE}/${path}`,
+            { 'Content-Type': 'application/json' },
+            buildJsonFormData(form),
+        );
+        if (response !== 'OK') {
+            throw new Error(`Unexpected response: ${JSON.stringify(response)}`);
+        }
+        return true;
+    } catch (err) {
+        console.error(`Error at submission: ${err}`);
+        alert('Sorry, unexpected error. Please try again later.');
+        return false;
+    } finally {
+        submitButton.disabled = false;
     }
 }
 
-const loginForm = document.querySelector("#login-form");
-if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-        submitLoginForm(e, this);
+// Bootstrap removes a dismissed alert from the page, so keep a copy to show next time.
+function createConfirmation(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return null;
+    const alertTemplate = container.querySelector('.alert').cloneNode(true);
+    return {
+        show() {
+            container.replaceChildren(alertTemplate.cloneNode(true));
+            container.style.display = 'block';
+        },
+        hide() {
+            container.style.display = 'none';
+        },
+    };
+}
+
+function openDocument(src) {
+    // Some browsers block pop-ups opened after a network request; open it in this tab instead.
+    if (!window.open(src, '_blank')) {
+        window.location.href = src;
+    }
+}
+
+/*-- Contact form --*/
+function updateOtherSubjectField(subject) {
+    const container = document.getElementById('other-subject');
+    container.innerHTML = subject.value === 'others'
+        ? '<input type="text" class="form-control" name="othersubject" id="othersubject" placeholder="Please specify subject">'
+        : '';
+}
+
+function initContactForm(form) {
+    const confirmation = createConfirmation('contact-done');
+    const subject = form.subject;
+    subject.addEventListener('change', () => updateOtherSubjectField(subject));
+
+    // Links can pre-select a subject, e.g. /contact.html?subject=Price%20and%20quotation
+    const requested = new URLSearchParams(window.location.search).get('subject');
+    const isRealSubject = [...subject.options].some((o) => o.value === requested && o.value !== 'default');
+    if (isRealSubject) {
+        subject.value = requested;
+        updateOtherSubjectField(subject);
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        confirmation.hide();
+
+        const checks = [
+            [form.name, isBlank(form.name)],
+            [form.email, isBadEmail(form.email)],
+            [subject, subject.value === 'default'],
+            [form.message, isBlank(form.message)],
+        ];
+        if (subject.value === 'others') {
+            checks.push([form.othersubject, isBlank(form.othersubject)]);
+        }
+        if (!validate(checks)) return;
+
+        if (await send('contact', form, document.getElementById('contact-submit'))) {
+            form.reset();
+            updateOtherSubjectField(subject);
+            confirmation.show();
+        }
     });
 }
-/*--/Event Listeners--*/
+/*-- /Contact form --*/
+
+/*-- Newsletter form (in the footer of every page) --*/
+function initSubscribeForm(form) {
+    const confirmation = createConfirmation('subscribe-done');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        confirmation.hide();
+
+        if (!validate([[form.email, isBadEmail(form.email)]])) return;
+
+        if (await send('subscribe', form, document.getElementById('subscribe-submit'))) {
+            form.reset();
+            confirmation.show();
+        }
+    });
+}
+/*-- /Newsletter form --*/
+
+/*-- Brochure download forms --*/
+function initDownloadForm(form) {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const valid = validate([
+            [form.name, isBlank(form.name)],
+            [form.email, isBadEmail(form.email)],
+            [form.phone, !isBlank(form.phone) && !REGEX_PHONE.test(form.phone.value.trim())],
+        ]);
+        if (!valid) return;
+
+        if (await send('download', form, form.elements.submit)) {
+            form.reset();
+            $('.modal').modal('hide');
+            openDocument(form.dataset.src);
+        }
+    });
+}
+/*-- /Brochure download forms --*/
+
+/*-- Placeholder login: nothing is sent anywhere until SSO is decided --*/
+function initLoginForm(form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const valid = validate([
+            [form.username, isBlank(form.username)],
+            [form.password, isBlank(form.password)],
+        ]);
+        if (!valid) return;
+
+        form.reset();
+        alert(`Username and/or Password didn't match`);
+    });
+}
+/*-- /Placeholder login --*/
+
+const contactForm = document.querySelector('#contact-form');
+if (contactForm) initContactForm(contactForm);
+
+const subscribeForm = document.querySelector('#subscribe-form');
+if (subscribeForm) initSubscribeForm(subscribeForm);
+
+document.querySelectorAll('.download-form').forEach(initDownloadForm);
+
+const loginForm = document.querySelector('#login-form');
+if (loginForm) initLoginForm(loginForm);

@@ -236,34 +236,29 @@ class CommonDownloadForm extends HTMLElement {
                         </div>
                         <div class="modal-body">
                             <div class="column">
-                                <form id="download-form-` + thisitem + `" class="download-form">
+                                <form id="download-form-` + thisitem + `" class="download-form" data-src="` + src + `">
                                     <div class="form-group has-feedback">
-                                        <label for="name">Name*</label>
-                                        <input type="text" class="form-control" name="name" placeholder="">
+                                        <label for="name-` + thisitem + `">Name*</label>
+                                        <input type="text" class="form-control" id="name-` + thisitem + `" name="name" placeholder="">
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <label for="email">E-mail*</label>
-                                        <input type="email" class="form-control" name="email" placeholder="">
+                                        <label for="email-` + thisitem + `">E-mail*</label>
+                                        <input type="email" class="form-control" id="email-` + thisitem + `" name="email" placeholder="">
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <label for="company">Company</label>
-                                        <input type="company" class="form-control" name="company"
-                                            placeholder="">
+                                        <label for="company-` + thisitem + `">Company</label>
+                                        <input type="text" class="form-control" id="company-` + thisitem + `" name="company" placeholder="">
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <label for="jobtitle">Job Title</label>
-                                        <input type="jobTItle" class="form-control" name="jobtitle"
-                                            placeholder="">
+                                        <label for="jobtitle-` + thisitem + `">Job Title</label>
+                                        <input type="text" class="form-control" id="jobtitle-` + thisitem + `" name="jobtitle" placeholder="">
                                     </div>
                                     <div class="form-group has-feedback">
-                                        <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" name="phone" placeholder="">
+                                        <label for="phone-` + thisitem + `">Phone</label>
+                                        <input type="text" class="form-control" id="phone-` + thisitem + `" name="phone" placeholder="">
                                     </div>
                                     <input type="submit" name="submit" value="Download"
                                         class="submit btn btn-default">
-                                    <!-- Fake Link -->
-                                    <button type="button" name="hidden-button" hidden
-                                        onclick="window.open('` + src + `', '_blank')">hidden download link ` + thisitem + `</button>
                                 </form>
                             </div>
                         </div>
