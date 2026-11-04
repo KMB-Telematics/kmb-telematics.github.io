@@ -11,6 +11,6 @@ export default defineConfig({
     command: 'node tests/server.mjs',
     url: `http://localhost:${PORT}/index.html`,
     reuseExistingServer: false,
-    env: { SITE_ROOT: process.env.SITE_ROOT || '.', PORT: String(PORT) },
+    env: { SITE_ROOT: process.env.SITE_ROOT || 'docs', PORT: String(PORT) },
   },
 });

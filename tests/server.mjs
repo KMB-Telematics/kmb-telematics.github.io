@@ -4,7 +4,7 @@ import { createServer } from 'node:http';
 import { createReadStream, statSync } from 'node:fs';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 
-const root = resolve(process.env.SITE_ROOT || '.');
+const root = resolve(process.env.SITE_ROOT || 'docs');
 const port = Number(process.env.PORT || 4173);
 const types = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
