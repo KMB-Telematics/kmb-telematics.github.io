@@ -73,6 +73,27 @@ test.describe('every public page', () => {
   });
 });
 
+test.describe('libraries', () => {
+  test('pages run the intended jQuery and Bootstrap versions and no removed plugins', async ({ page }) => {
+    await page.goto('/technology.html');
+    await settle(page);
+    const v = await page.evaluate(() => ({
+      jquery: jQuery.fn.jquery,
+      bootstrap: jQuery.fn.modal.Constructor.VERSION,
+      removed: ['fancybox', 'quicksand', 'flexslider', 'owlCarousel'].filter((p) => jQuery.fn[p]),
+    }));
+    expect(v).toEqual({ jquery: '3.7.1', bootstrap: '3.4.1', removed: [] });
+  });
+
+  test('footer social tooltips work', async ({ page }) => {
+    await page.goto('/technology.html');
+    await settle(page);
+    // The icons come from a CDN blocked in tests, so the links have no size to hover over.
+    await page.evaluate(() => jQuery('.social-network a[data-original-title="Linkedin"]').tooltip('show'));
+    await expect(page.locator('.tooltip')).toContainText('Linkedin');
+  });
+});
+
 test.describe('home page', () => {
   test('headline rotates, slider starts, video and partners are present', async ({ page, request, site }) => {
     await page.goto('/index.html');

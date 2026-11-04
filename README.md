@@ -13,7 +13,7 @@ docs/                 Published site. Keep CNAME here.
   assets/
     css/              Site styles
     js/               Site code: layout components, forms
-    vendor/           Third-party libraries
+    vendor/           Third-party libraries, version in the file name
     img/  video/      Media, grouped by where it is used
 templates/            Starting points for new pages. Not published.
 design/               Source and unused media. Not published.
@@ -37,3 +37,11 @@ Tests block third-party requests and mock the form API, so they never create rea
 - **Card pages:** `applications.html` and `products.html` load `#blog-img`, `#blog-header` and `#blog-text` from each subpage, using `/subpages/` paths.
 - **Download buttons:** `data-target="#popupModal-<item>"` must match `thisitem` on `<common-download-form>`.
 - **Public URLs:** Pages has no server-side redirects, so a moved page needs a redirect stub at its old URL.
+
+## Libraries
+
+| Library | Version | Source |
+|---|---|---|
+| jQuery | 3.7.1 | npm `jquery` |
+| Bootstrap | 3.4.1 (final 3.x release) | npm `bootstrap` |
+| Morphext | as previously bundled | github.com/MrSaints/Morphext |
