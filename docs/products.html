@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Radar Products | KMB Telematics</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="Specifications and brochures for KMB software-defined imaging radars: the Counter-UAS (C-UAS) radar and the airborne detect and avoid (DAA) radar." name="description">
+	<meta content="KMB Telematics Inc." name="author">
+	<meta name="robots" content="index,follow">
+	<link rel="canonical" href="https://www.kmbradar.com/products.html">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="KMB Telematics">
+	<meta property="og:title" content="Radar Products | KMB Telematics">
+	<meta property="og:description" content="Specifications and brochures for KMB software-defined imaging radars: the Counter-UAS (C-UAS) radar and the airborne detect and avoid (DAA) radar.">
+	<meta property="og:url" content="https://www.kmbradar.com/products.html">
+	<meta property="og:image" content="https://www.kmbradar.com/assets/img/social/kmb-share.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="KMB Telematics: Software-Defined Imaging Radar for Counter-UAS, Detect and Avoid and BVLOS">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@KmbTelematics">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+	<link rel="icon" type="image/png" href="/assets/img/favicon/favicon.ico">
+	<link rel="manifest" href="/assets/img/favicon/site.webmanifest">
+	<!-- css -->
+	<link href="/assets/vendor/bootstrap/bootstrap-3.4.1.min.css" rel="stylesheet" />
+	<link rel="preload" href="/assets/vendor/play/play-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/assets/vendor/play/play-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+	<link href="/assets/vendor/font-awesome/icons.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper">
+
+		<!-- header -->
+		<common-header thispage="products"></common-header>
+<main>
+		<!-- end header -->
+
+		<!-- inner header -->
+		<inner-header pagename="KMB Radar Products"></inner-header>
+		<!-- end inner header -->
+
+		<!-- content -->
+		<section id="content">
+			<div class="container">
+				<div class="row service-v1 margin-bottom-40">
+					<blog-post src="/subpages/kmb-product-counter-uas-radar.html"></blog-post>
+
+					<blog-post src="/subpages/kmb-product-daa-radar.html"></blog-post>
+				</div>
+			</div>
+		</section>
+		<!-- end content -->
+
+</main>
+		<!-- footer -->
+		<common-footer></common-footer>
+		<!-- end footer -->
+	</div>
+	<scroll-up></scroll-up>
+	<!-- javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/assets/vendor/jquery/jquery-3.7.1.min.js"></script>
+	<script src="/assets/vendor/bootstrap/bootstrap-3.4.1.min.js"></script>
+	<script src="/assets/js/custom.js"></script>
+	<script type=module src="/assets/js/main.js"></script>
+	<script type=module src="/assets/js/formhandlers.js"></script>
+	<script>
+		class BlogPost extends HTMLElement {
+			connectedCallback() {
+				var src = this.attributes.src.value;
+				// get only the filename
+				var name = src.replace(/^.*[\\\/]/, '');
+				name = name.replace(/\.[^/.]+$/, '');
+				var contentText = `
+					<div class="col-md-6 md-margin-bottom-40">
+						<div class="blog" id="` + name + `">
+							<a href="/subpages/` + name + `.html">
+								<div class="blog-cover" id="cover-` + name + `"></div>
+							</a>
+							<center><h2 class="card-heading"><a href="/subpages/` + name + `.html"><div class="blog-title" id="title-` + name + `"></div></a></h2></center>
+						</div>
+					</div>
+				`;
+				this.innerHTML = contentText;
+			}
+		}
+		customElements.define('blog-post', BlogPost);
+	</script>
+	<script>
+		var blogFunction = function (param) {
+			$('.blog-cover#cover-' + param).load('/subpages/' + param + '.html #blog-img');
+			$('.blog-title#title-' + param).load('/subpages/' + param + '.html #blog-header', function () {
+				var $h = $(this);
+				var text = $h.text();
+				$h.text(text);
+			});
+		};
+		blogFunction('kmb-product-counter-uas-radar');
+		blogFunction('kmb-product-daa-radar');
+	</script>
+</body>
+
+</html>

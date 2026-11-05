@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Imaging Radar Applications | KMB Telematics</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="KMB imaging radar applications: counter-UAS, stationary, hovering and on-the-move drone detection, active protection systems, detect and avoid, BVLOS and Part 107.31 waivers." name="description">
+	<meta content="KMB Telematics Inc." name="author">
+	<meta name="robots" content="index,follow">
+	<link rel="canonical" href="https://www.kmbradar.com/applications.html">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="KMB Telematics">
+	<meta property="og:title" content="Imaging Radar Applications | KMB Telematics">
+	<meta property="og:description" content="KMB imaging radar applications: counter-UAS, stationary, hovering and on-the-move drone detection, active protection systems, detect and avoid, BVLOS and Part 107.31 waivers.">
+	<meta property="og:url" content="https://www.kmbradar.com/applications.html">
+	<meta property="og:image" content="https://www.kmbradar.com/assets/img/social/kmb-share.jpg">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+	<meta property="og:image:alt" content="KMB Telematics: Software-Defined Imaging Radar for Counter-UAS, Detect and Avoid and BVLOS">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@KmbTelematics">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
+	<link rel="icon" type="image/png" href="/assets/img/favicon/favicon.ico">
+	<link rel="manifest" href="/assets/img/favicon/site.webmanifest">
+	<!-- css -->
+	<link href="/assets/vendor/bootstrap/bootstrap-3.4.1.min.css" rel="stylesheet" />
+	<link rel="preload" href="/assets/vendor/play/play-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/assets/vendor/play/play-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+	<link href="/assets/vendor/font-awesome/icons.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div id="wrapper">
+
+		<!-- header -->
+		<common-header thispage="applications"></common-header>
+<main>
+		<!-- end header -->
+
+		<!-- inner header -->
+		<inner-header pagename="KMB Imaging Radar Applications"></inner-header>
+		<!-- end inner header -->
+
+		<!-- content -->
+		<section id="content">
+			<div class="container content">
+				<div class="row service-v1 margin-bottom-40">
+					<blog-post src="/subpages/counter-uas.html"></blog-post>
+
+					<blog-post src="/subpages/drone-stationary.html"></blog-post>
+
+					<blog-post src="/subpages/drone-hovering.html"></blog-post>
+
+					<blog-post src="/subpages/drone-on-the-move.html"></blog-post>
+				</div>
+				<div class="row service-v1 margin-bottom-40">
+					<blog-post src="/subpages/aps.html"></blog-post>
+
+					<blog-post src="/subpages/daa-radar.html"></blog-post>
+
+					<blog-post src="/subpages/bvlos-ops.html"></blog-post>
+
+					<blog-post src="/subpages/part-107-waivers.html"></blog-post>
+				</div>
+			</div>
+		</section>
+		<!-- end content -->
+
+</main>
+		<!-- footer -->
+		<common-footer></common-footer>
+		<!-- end footer -->
+	</div>
+	<scroll-up></scroll-up>
+
+	<!-- javascript
+		================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="/assets/vendor/jquery/jquery-3.7.1.min.js"></script>
+	<script src="/assets/vendor/bootstrap/bootstrap-3.4.1.min.js"></script>
+	<script src="/assets/js/custom.js"></script>
+	<script type=module src="/assets/js/main.js"></script>
+	<script type=module src="/assets/js/formhandlers.js"></script>
+	<script>
+		class BlogPost extends HTMLElement {
+			connectedCallback() {
+				var src = this.attributes.src.value;
+				// get only the filename
+				var name = src.replace(/^.*[\\\/]/, '');
+				name = name.replace(/\.[^/.]+$/, '');
+				var contentText = `
+					<div class="col-md-3 md-margin-bottom-40">
+						<div class="blog" id="` + name + `">
+							<a href="/subpages/` + name + `.html">
+								<div class="blog-cover" id="cover-` + name + `"></div>
+							</a>
+							<h2 class="card-heading"><a href="/subpages/` + name + `.html"><div class="blog-title" id="title-` + name + `"></div></a></h2>
+							<div class="blog-snippet" id="snippet-` + name + `"></div>
+						</div>
+					</div>
+				`;
+				this.innerHTML = contentText;
+			}
+		}
+		customElements.define('blog-post', BlogPost);
+	</script>
+	<script>
+		var blogFunction = function (param) {
+			$('.blog-cover#cover-' + param).load('/subpages/' + param + '.html #blog-img');
+			$('.blog-title#title-' + param).load('/subpages/' + param + '.html #blog-header', function () {
+				var $h = $(this);
+				var text = $h.text();
+				$h.text(text);
+			});
+			$('.blog-snippet#snippet-' + param).load('/subpages/' + param + '.html #blog-text', function () {
+				var $p = $(this);
+				var text = $p.text();
+				var shortString = text.substring(0, 197); 
+				shortString = shortString.substring(0, Math.min(shortString.length, shortString.lastIndexOf(" "))) 
+				shortString += ' <a href="/subpages/' + param + '.html">[...]</a>';
+				$p.html(shortString);
+			});
+		};
+		blogFunction('counter-uas');
+		blogFunction('drone-stationary');
+		blogFunction('drone-hovering');
+		blogFunction('drone-on-the-move');
+		blogFunction('aps');
+		blogFunction('daa-radar');
+		blogFunction('bvlos-ops');
+		blogFunction('part-107-waivers');
+	</script>
+</body>
+
+</html>
