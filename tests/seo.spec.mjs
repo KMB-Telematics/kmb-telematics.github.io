@@ -21,8 +21,14 @@ test('each page has a good, unique title, description and canonical URL', async 
     expect(description.length, `${path} description`).toBeLessThanOrEqual(190);
     titles.add(title);
     descriptions.add(description);
-    await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', canonical(path));
-    await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'index,follow');
+    if (path === 'resources.html') {
+      // Only a placeholder login for now, so it stays out of search results.
+      await expect(page.locator('link[rel=canonical]')).toHaveCount(0);
+      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex');
+    } else {
+      await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href', canonical(path));
+      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'index,follow');
+    }
   }
   expect(titles.size).toBe(PATHS.length);
   expect(descriptions.size).toBe(PATHS.length);
@@ -32,7 +38,7 @@ test('robots.txt points to a sitemap whose pages all exist', async ({ request })
   expect(await (await request.get('/robots.txt')).text()).toContain(`Sitemap: ${BASE}/sitemap.xml`);
   const xml = await (await request.get('/sitemap.xml')).text();
   const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
-  expect(urls).toHaveLength(PATHS.length - 1); // the Resources login page is left out
+  expect(urls).toHaveLength(PATHS.length - 1); // Resources is noindex, so it is left out
   for (const url of urls) {
     expect((await request.head(url.replace(BASE, ''))).status(), url).toBe(200);
   }

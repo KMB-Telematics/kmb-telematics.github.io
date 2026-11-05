@@ -35,7 +35,7 @@ The tests also cover phone widths, accessibility (axe), search metadata and link
 
 ## Adding a page
 
-Start from `templates/`, give the page a unique title, description, canonical URL and preview tags, and add it to `docs/sitemap.xml`.
+Start from `templates/`, give the page a unique title, description, canonical URL and preview tags, and add it to `docs/sitemap.xml`. `resources.html` is the exception: it is `noindex` while it holds only a placeholder login.
 
 ## Security reports
 
