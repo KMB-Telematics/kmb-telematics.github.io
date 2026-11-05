@@ -197,6 +197,16 @@ test.describe('card pages built from subpages', () => {
 });
 
 test.describe('product pages', () => {
+  test('carousel images download in advance so slides do not jump', async ({ page }) => {
+    for (const name of PRODUCTS) {
+      await page.goto(`/subpages/${name}.html`);
+      await settle(page);
+      await expect(page.locator('.carousel img[loading=lazy]')).toHaveCount(0);
+      const notLoaded = await page.$$eval('.carousel img', (imgs) => imgs.filter((i) => !i.complete || i.naturalWidth === 0).length);
+      expect(notLoaded).toBe(0);
+    }
+  });
+
   test('carousel advances with its next control', async ({ page }) => {
     await page.goto('/subpages/kmb-product-counter-uas-radar.html');
     await settle(page);
