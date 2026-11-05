@@ -431,6 +431,9 @@ test.describe('legal pages and notices', () => {
     await page.goto('/subpages/privacy-policy.html');
     await expect(page.locator('.legal-page')).toContainText('up to 60 months');
     await expect(page.locator('.legal-page')).not.toContainText(/follow(ing)? up/i);
+    await expect(page.locator('.legal-page a[href*="aws-data-processing-addendum"]')).toHaveCount(1);
+    await expect(page.locator('.legal-page a[href="https://www.airtable.com/company/dpa"]')).toHaveCount(1);
+    await expect(page.locator('.legal-page')).toContainText('request a copy of these safeguards');
     await page.goto('/subpages/terms-and-conditions.html');
     await expect(page.locator('.legal-page a[href*="terms_maps"]')).toHaveCount(1);
     for (const name of LEGAL) {
