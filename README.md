@@ -14,9 +14,9 @@ docs/                 Published site. Keep CNAME here.
     css/              Site styles
     js/               Site code: layout components, forms
     vendor/           Third-party libraries, version in the file name
-    img/  video/      Media, grouped by where it is used
+    img/  video/      Media, grouped by where it is used. Pages use WebP; full-size files back the click-to-enlarge links.
 templates/            Starting points for new pages. Not published.
-design/               Source and unused media. Not published.
+design/               Source and unused media, including full-size originals. Not published.
 tests/                Browser tests
 ```
 
@@ -31,11 +31,18 @@ npm test
 
 Tests block third-party requests and mock the form API, so they never create real records.
 
+The tests also cover phone widths, accessibility (axe), search metadata and link previews.
+
+## Adding a page
+
+Start from `templates/`, give the page a unique title, description, canonical URL and preview tags, and add it to `docs/sitemap.xml`.
+
 ## Things that are easy to break
 
 - **Form field names:** `API_FIELD_NAMES` in `docs/assets/js/formhandlers.js` defines the names the backend receives.
 - **Card pages:** `applications.html` and `products.html` load `#blog-img`, `#blog-header` and `#blog-text` from each subpage, using `/subpages/` paths.
 - **Download buttons:** `data-target="#popupModal-<item>"` must match `thisitem` on `<common-download-form>`.
+- **Home page video:** keep the radar plot readable when re-encoding. Very high compression erases its faint grid lines.
 - **Public URLs:** Pages has no server-side redirects, so a moved page needs a redirect stub at its old URL.
 
 ## Libraries

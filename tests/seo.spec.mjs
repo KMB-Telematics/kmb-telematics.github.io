@@ -44,3 +44,17 @@ test('home page describes the organization for search engines', async ({ page })
   expect(data.legalName).toBe('KMB Telematics Inc.');
   expect(data.address.postalCode).toBe('20009');
 });
+
+test('each page has a link preview with the share image', async ({ page, request }) => {
+  test.setTimeout(60_000);
+  const image = await (await request.head('/assets/img/social/kmb-share.jpg'));
+  expect(image.status()).toBe(200);
+  for (const path of PATHS) {
+    await page.goto(`/${path}`);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', await page.title());
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', canonical(path));
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /.{50,}/);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', `${BASE}/assets/img/social/kmb-share.jpg`);
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
+  }
+});
