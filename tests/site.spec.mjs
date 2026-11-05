@@ -308,6 +308,11 @@ test.describe('layout behaviour', () => {
     await expect(page.locator('.cryptedmail')).toHaveAttribute('data-emaildomain', 'kmb');
   });
 
+  test('footer shows the copyright years', async ({ page }) => {
+    await page.goto('/technology.html');
+    await expect(page.locator('.copyright')).toContainText('© 2018 - 2027 KMB Telematics Inc.');
+  });
+
   test('scroll-to-top appears and returns to the top', async ({ page }) => {
     await page.goto('/technology.html');
     await settle(page);

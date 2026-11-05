@@ -197,7 +197,7 @@ class CommonFooter extends HTMLElement {
                         <div class="col-lg-6">
                             <div class="copyright">
                                 <p>
-                                    <span>&copy; KMB Telematics Inc. 2025 All rights reserved. </span>
+                                    <span>&copy; 2018 - 2027 KMB Telematics Inc. All rights reserved. </span>
                                 </p>
                                 </p>
                             </div>
