@@ -423,6 +423,11 @@ test.describe('legal pages and notices', () => {
 });
 
 test.describe('phone layout', () => {
+  test('sideways scrolling is prevented on browsers without overflow-x: clip', async ({ request }) => {
+    const css = await (await request.get('/assets/css/style.css')).text();
+    expect(css).toMatch(/#wrapper \{ overflow-x: hidden; overflow-x: clip; \}/);
+  });
+
   for (const width of [375, 320]) {
     test(`home headline clears the logo at ${width}px`, async ({ page }) => {
       await page.setViewportSize({ width, height: 700 });

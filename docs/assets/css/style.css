@@ -2459,7 +2459,7 @@ hr.center-ball:before {
 common-footer { display: block; margin-top: auto; }
 
 /* Keep every page within the width of a phone screen */
-#wrapper { overflow-x: clip; } /* Slide-in animations must not cause sideways scrolling */
+#wrapper { overflow-x: hidden; overflow-x: clip; } /* Slide-in animations must not cause sideways scrolling */
 @media only screen and (max-width: 480px) {
     .section.group img { max-width: 100%; }
     .styled-table { min-width: 0; width: 100%; }
