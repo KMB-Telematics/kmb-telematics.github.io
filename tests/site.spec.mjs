@@ -105,12 +105,27 @@ test.describe('home page video', () => {
 });
 
 test.describe('fonts and icons', () => {
-  test('load from links in the page head, not imports inside the stylesheet', async ({ page, request, baseURL }) => {
+  test('the Play font is hosted with the site and preloaded', async ({ page, request }) => {
+    const requests = [];
+    page.on('request', (r) => requests.push(r.url()));
     await page.goto('/technology.html');
-    await expect(page.locator('head link[href*="fonts.googleapis.com/css2"]')).toHaveCount(1);
+    await settle(page);
+    expect(requests.filter((u) => /fonts\.(googleapis|gstatic)\.com/.test(u))).toEqual([]);
+    await expect(page.locator('head link[rel=preload][as=font]')).toHaveCount(2);
+    for (const href of await page.locator('head link[rel=preload][as=font]').evaluateAll((l) => l.map((e) => e.href))) {
+      expect((await request.head(href)).status()).toBe(200);
+    }
+    const loaded = await page.evaluate(() => [...document.fonts].filter((f) => f.family.includes('Play') && f.status === 'loaded').map((f) => f.weight).sort());
+    expect(loaded).toEqual(['400', '700']);
     await expect(page.locator('head link[href*="font-awesome"]')).toHaveCount(3);
-    const css = await (await request.get(`${baseURL}/assets/css/style.css`)).text();
-    expect(css).not.toMatch(/@import url\('https?:/);
+  });
+
+  test('policies no longer list Google Fonts', async ({ page }) => {
+    for (const name of ['privacy-policy', 'cookie-policy']) {
+      await page.goto(`/subpages/${name}.html`);
+      await expect(page.locator('.legal-page')).not.toContainText('Google Fonts');
+      await expect(page.locator('.legal-page')).toContainText('cdnjs');
+    }
   });
 });
 

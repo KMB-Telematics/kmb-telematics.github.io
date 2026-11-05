@@ -52,3 +52,4 @@ Start from `templates/`, give the page a unique title, description, canonical UR
 | jQuery | 3.7.1 | npm `jquery` |
 | Bootstrap | 3.4.1 (final 3.x release) | npm `bootstrap` |
 | Morphext | as previously bundled | github.com/MrSaints/Morphext |
+| Play font | 5.3.0 (SIL Open Font License) | npm `@fontsource/play` |
