@@ -57,3 +57,6 @@ Start from `templates/`, give the page a unique title, description, canonical UR
 | Bootstrap | 3.4.1 (final 3.x release) | npm `bootstrap` |
 | Morphext | as previously bundled | github.com/MrSaints/Morphext |
 | Play font | 5.3.0 (SIL Open Font License) | npm `@fontsource/play` |
+| Font Awesome Free | 6.5.2, reduced to the five icons in use | npm `@fortawesome/fontawesome-free` |
+
+To use another icon, add its code to `vendor/font-awesome/icons.css` and rebuild the reduced font files from the full package. Icons outside the set will not display.

@@ -158,14 +158,29 @@ test.describe('fonts and icons', () => {
     }
     const loaded = await page.evaluate(() => [...document.fonts].filter((f) => f.family.includes('Play') && f.status === 'loaded').map((f) => f.weight).sort());
     expect(loaded).toEqual(['400', '700']);
-    await expect(page.locator('head link[href*="font-awesome"]')).toHaveCount(3);
   });
 
-  test('policies no longer list Google Fonts', async ({ page }) => {
+  test('icons are hosted with the site, display, and every icon used is in the reduced set', async ({ page, request }) => {
+    const requests = [];
+    page.on('request', (r) => requests.push(r.url()));
+    await page.goto('/subpages/kmb-product-daa-radar.html');
+    await settle(page);
+    await page.waitForTimeout(300);
+    expect(requests.filter((u) => u.includes('cdnjs'))).toEqual([]);
+    const families = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '')));
+    expect(families).toEqual(expect.arrayContaining(['Font Awesome 6 Free', 'Font Awesome 6 Brands']));
+    const css = await (await request.get('/assets/vendor/font-awesome/icons.css')).text();
+    const used = await page.$$eval('i[class*="fa-"]', (icons) => icons.flatMap((i) => [...i.classList]).filter((c) => c.startsWith('fa-') && !['fa-solid', 'fa-brands'].includes(c)));
+    expect(used.length).toBeGreaterThan(3);
+    for (const name of used) expect(css).toContain(`.${name}:before`);
+  });
+
+  test('policies no longer list fonts or icons as third parties', async ({ page }) => {
     for (const name of ['privacy-policy', 'cookie-policy']) {
       await page.goto(`/subpages/${name}.html`);
-      await expect(page.locator('.legal-page')).not.toContainText('Google Fonts');
-      await expect(page.locator('.legal-page')).toContainText('cdnjs');
+      await expect(page.locator('.legal-page')).not.toContainText(/Google Fonts|cdnjs/);
+      await expect(page.locator('.legal-page')).toContainText('Google Maps');
+      await expect(page.locator('.legal-page')).toContainText('Plausible');
     }
   });
 });
