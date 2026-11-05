@@ -301,6 +301,30 @@ test.describe('legal pages and notices', () => {
   });
 });
 
+test.describe('phone layout', () => {
+  for (const width of [375, 320]) {
+    for (const url of ALL_PAGES) {
+      test(`${url} fits a ${width}px screen`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 700 });
+        await page.goto(url);
+        await settle(page);
+        await page.waitForTimeout(1200); // let slide-in animations finish
+        const result = await page.evaluate(() => {
+          const limit = document.documentElement.clientWidth + 1;
+          return {
+            pageWidth: document.documentElement.scrollWidth,
+            tooWide: [...document.querySelectorAll('#wrapper *')]
+              .filter((e) => !e.closest('.modal') && !e.closest('.table-responsive') && !e.closest('.carousel')
+                && e.getBoundingClientRect().width > 0 && e.getBoundingClientRect().right > limit)
+              .map((e) => e.tagName.toLowerCase() + (e.className && typeof e.className === 'string' ? `.${e.className.split(' ')[0]}` : '')),
+          };
+        });
+        expect(result).toEqual({ pageWidth: width, tooWide: [] });
+      });
+    }
+  }
+});
+
 test.describe('layout behaviour', () => {
   test('footer contact links carry the phone and email', async ({ page }) => {
     await page.goto('/technology.html');

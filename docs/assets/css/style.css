@@ -2457,3 +2457,11 @@ hr.center-ball:before {
 /* Keep the footer at the bottom of the window on short pages */
 #wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 common-footer { display: block; margin-top: auto; }
+
+/* Keep every page within the width of a phone screen */
+#wrapper { overflow-x: clip; } /* Slide-in animations must not cause sideways scrolling */
+@media only screen and (max-width: 480px) {
+    .section.group img { max-width: 100%; }
+    .styled-table { min-width: 0; width: 100%; }
+    .styled-table th, .styled-table td { padding: 1px 6px; hyphens: auto; overflow-wrap: anywhere; }
+}
