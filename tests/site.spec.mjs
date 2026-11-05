@@ -313,6 +313,19 @@ test.describe('layout behaviour', () => {
     await expect(page.locator('.copyright')).toContainText('© 2018 - 2027 KMB Telematics Inc.');
   });
 
+  for (const url of ['/technology.html', '/resources.html', '/subpages/cookie-policy.html', '/index.html']) {
+    test(`footer reaches the bottom of a tall window on ${url}`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 3000 });
+      await page.goto(url);
+      await settle(page);
+      const layout = await page.evaluate(() => ({
+        footerBottom: Math.round(document.querySelector('common-footer').getBoundingClientRect().bottom),
+        pageHeight: document.documentElement.scrollHeight,
+      }));
+      expect(layout).toEqual({ footerBottom: 3000, pageHeight: 3000 });
+    });
+  }
+
   test('scroll-to-top appears and returns to the top', async ({ page }) => {
     await page.goto('/technology.html');
     await settle(page);

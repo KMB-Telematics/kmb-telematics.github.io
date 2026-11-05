@@ -2453,3 +2453,7 @@ hr.center-ball:before {
 .legal-updated { color: #777; }
 .legal-page .styled-table { width: 100%; margin: 15px 0; }
 .form-privacy { font-size: 12px; line-height: 1.5; margin: 0 0 10px; }
+
+/* Keep the footer at the bottom of the window on short pages */
+#wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+common-footer { display: block; margin-top: auto; }
