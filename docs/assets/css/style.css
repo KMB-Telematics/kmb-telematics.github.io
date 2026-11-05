@@ -5,6 +5,17 @@ Note: Licence under Creative Commons Attribution 3.0
 
 @import url('animate.css');
 
+/* Home page hero: one static slide */
+.slides { margin: 0; padding: 0; list-style: none; }
+.slides:after { content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+.flexslider { margin: 0; padding: 0; position: relative; }
+.flexslider .slides > li { display: block; }
+.flexslider .slides img { width: 100%; display: block; }
+.flex-caption { position: absolute; z-index: 99; }
+.flex-caption p { line-height: 22px; font-weight: 300; color: #fff; }
+
+.carousel li { margin-right: 5px; }
+
 /* Play font, hosted with the site */
 @font-face { font-family: 'Play'; font-style: normal; font-weight: 400; font-display: swap; src: url('../vendor/play/play-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
 @font-face { font-family: 'Play'; font-style: normal; font-weight: 400; font-display: swap; src: url('../vendor/play/play-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
@@ -583,16 +594,6 @@ img.img-center {
 /* Testimonial
 ----------------------------------*/
 
-.testimonial-area {
-    padding: 0 0 0 0;
-    margin: 0;
-    background: url(../img/low-poly01.jpg) fixed center center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -ms-background-size: cover;
-}
-
 .testimonial-solid p {
     color: #000000;
     font-size: 16px;
@@ -631,30 +632,6 @@ section.hero-text h1 {
     /*box-shadow: 0px 0px 2px 0px rgb(155, 155, 155);*/
 
     border-radius: 8px;
-}
-
-#clients .client .client1 {
-    background: url("../img/client1.png") 0 -75px;
-}
-
-#clients .client .client1:hover {
-    background-position: 1px 0px;
-}
-
-#clients .client .client2 {
-    background: url("../img/client2.png") 0 -75px;
-}
-
-#clients .client .client2:hover {
-    background-position: -1px 0px;
-}
-
-#clients .client .client3 {
-    background: url("../img/client3.png") 0 -76px;
-}
-
-#clients .client .client3:hover {
-    background-position: 0px 0px;
 }
 
 /* Content
@@ -1197,7 +1174,6 @@ ul.portfolio-categ li a:active {
 blockquote {
     font-size: 16px;
     font-weight: 400;
-    font-family: 'Noto Serif', serif;
     font-style: italic;
     padding-left: 0;
     color: #a2a2a2;
@@ -1227,7 +1203,6 @@ blockquote cite a:visited {
 .pullquote-left {
     display: block;
     color: #a2a2a2;
-    font-family: 'Noto Serif', serif;
     font-size: 14px;
     line-height: 1.6em;
     padding-left: 20px;
@@ -1236,7 +1211,6 @@ blockquote cite a:visited {
 .pullquote-right {
     display: block;
     color: #a2a2a2;
-    font-family: 'Noto Serif', serif;
     font-size: 14px;
     line-height: 1.6em;
     padding-right: 20px;
@@ -1547,7 +1521,6 @@ ul.team-detail li ul.social-network li i {
     margin-top: 10px;
     color: var(--kmb-color);
     font-size: 17px;
-    font-family: 'Noto Serif', serif;
 }
 
 .pricing-box-item .icon .price-circled {

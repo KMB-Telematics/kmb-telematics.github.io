@@ -185,6 +185,27 @@ test.describe('fonts and icons', () => {
   });
 });
 
+test.describe('stylesheets', () => {
+  test('site CSS only refers to files that exist and fonts that load', async ({ request }) => {
+    const css = await (await request.get('/assets/css/style.css')).text();
+    expect(css).not.toContain('Noto Serif');
+    const urls = [...css.matchAll(/url\(["']?([^"')]+)/g)].map((m) => m[1]);
+    expect(urls.length).toBeGreaterThan(3);
+    for (const url of urls) {
+      const full = new URL(url, 'http://x/assets/css/style.css').pathname;
+      expect((await request.head(full)).status(), full).toBe(200);
+    }
+  });
+
+  test('home hero shows its single slide', async ({ page }) => {
+    await page.goto('/index.html');
+    await settle(page);
+    await expect(page.locator('#main-slider .slides img')).toBeVisible();
+    await expect(page.locator('#main-slider h1')).toBeVisible();
+    await expect(page.locator('link[href*="flexslider"]')).toHaveCount(0);
+  });
+});
+
 test.describe('libraries', () => {
   test('pages run the intended jQuery and Bootstrap versions and no removed plugins', async ({ page }) => {
     await page.goto('/technology.html');
