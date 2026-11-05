@@ -325,6 +325,20 @@ test.describe('legal pages and notices', () => {
     });
   }
 
+  test('policies state the agreed facts', async ({ page }) => {
+    await page.goto('/subpages/privacy-policy.html');
+    await expect(page.locator('.legal-page')).toContainText('up to 60 months');
+    await expect(page.locator('.legal-page')).not.toContainText(/follow(ing)? up/i);
+    await page.goto('/subpages/terms-and-conditions.html');
+    await expect(page.locator('.legal-page a[href*="terms_maps"]')).toHaveCount(1);
+    for (const name of LEGAL) {
+      await page.goto(`/subpages/${name}.html`);
+      await expect(page.locator('.legal-updated')).toHaveText('Last updated: November 5, 2026');
+    }
+    await page.goto('/subpages/kmb-product-daa-radar.html');
+    await expect(page.locator('#popupModal-daa .form-privacy')).not.toContainText('follow up');
+  });
+
   test('footer links to all three policies', async ({ page }) => {
     await page.goto('/technology.html');
     for (const name of LEGAL) {

@@ -261,7 +261,7 @@ class CommonDownloadForm extends HTMLElement {
                                         <label for="phone-` + thisitem + `">Phone</label>
                                         <input type="text" class="form-control" id="phone-` + thisitem + `" name="phone" placeholder="">
                                     </div>
-                                    <p class="form-privacy">We use your details to provide the brochure and follow up on your interest. See our <a href="/subpages/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+                                    <p class="form-privacy">We use your details to provide the brochure and keep a record of the request. See our <a href="/subpages/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
                                     <input type="submit" name="submit" value="Download"
                                         class="submit btn btn-default">
                                 </form>
