@@ -1,5 +1,5 @@
 // Minimal static server that behaves like GitHub Pages for our purposes:
-// no directory listing, "/" serves index.html, unknown paths return 404.
+// no directory listing, "/" serves index.html, unknown paths return 404.html with a 404 status.
 import { createServer } from 'node:http';
 import { createReadStream, statSync } from 'node:fs';
 import { extname, join, normalize, resolve, sep } from 'node:path';
@@ -30,7 +30,8 @@ createServer((req, res) => {
   try {
     if (!statSync(file).isFile()) throw new Error('not a file');
   } catch {
-    res.writeHead(404).end('Not found');
+    res.writeHead(404, { 'Content-Type': types['.html'] });
+    createReadStream(join(root, '404.html')).pipe(res);
     return;
   }
   res.writeHead(200, { 'Content-Type': types[extname(file).toLowerCase()] || 'application/octet-stream' });

@@ -6,6 +6,7 @@ const PAGES = [
   '/subpages/counter-uas.html', '/subpages/drone-stationary.html', '/subpages/drone-hovering.html', '/subpages/drone-on-the-move.html',
   '/subpages/aps.html', '/subpages/daa-radar.html', '/subpages/bvlos-ops.html', '/subpages/part-107-waivers.html',
   '/subpages/kmb-product-counter-uas-radar.html', '/subpages/kmb-product-daa-radar.html',
+  '/no-such-page.html',
   '/subpages/privacy-policy.html', '/subpages/cookie-policy.html', '/subpages/terms-and-conditions.html',
 ];
 

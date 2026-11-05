@@ -418,6 +418,33 @@ test.describe('phone layout', () => {
   }
 });
 
+test.describe('page not found', () => {
+  for (const url of ['/no-such-page.html', '/subpages/old/deep/link']) {
+    test(`${url} shows the branded page with a 404 status`, async ({ page, site }) => {
+      const response = await page.goto(url);
+      expect(response.status()).toBe(404);
+      await settle(page);
+      await expect(page.locator('h1')).toHaveText('Page Not Found');
+      await expect(page.locator('common-header .navbar-nav li a')).toHaveCount(6);
+      await expect(page.locator('common-footer footer')).toHaveCount(1);
+      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex');
+      const brokenImages = await page.$$eval('img', (imgs) => imgs.filter((i) => i.complete && i.naturalWidth === 0).length);
+      expect(brokenImages).toBe(0);
+      expect(site.pageErrors).toEqual([]);
+      expect(site.localFailures.filter((f) => !f.endsWith(url))).toEqual([]);
+      await page.locator('.not-found a[href="/products.html"]').click();
+      await expect(page).toHaveURL(/products\.html$/);
+    });
+  }
+
+  test('fits a phone screen', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto('/no-such-page.html');
+    await settle(page);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320);
+  });
+});
+
 test.describe('layout behaviour', () => {
   test('footer contact links carry the phone and email', async ({ page }) => {
     await page.goto('/technology.html');
