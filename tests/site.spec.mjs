@@ -65,6 +65,9 @@ test.describe('every public page', () => {
     await page.goto('/index.html');
     const href = await page.locator('link[rel=manifest]').evaluate((l) => l.href);
     const manifest = await (await request.get(href)).json();
+    expect(manifest.name).toBe('KMB Telematics');
+    expect(manifest.short_name).toBe('KMB');
+    expect(manifest.start_url).toBe('/');
     for (const icon of manifest.icons) {
       expect((await request.head(new URL(icon.src, href).href)).status()).toBe(200);
     }
