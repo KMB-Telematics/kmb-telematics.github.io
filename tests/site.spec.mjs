@@ -344,6 +344,29 @@ test.describe('legal pages and notices', () => {
 
 test.describe('phone layout', () => {
   for (const width of [375, 320]) {
+    test(`home headline clears the logo at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 700 });
+      await page.goto('/index.html');
+      await settle(page);
+      const logoBottom = await page.locator('.navbar-brand img').evaluate((e) => e.getBoundingClientRect().bottom);
+      const headingTop = await page.locator('#main-slider h1').evaluate((e) => e.getBoundingClientRect().top);
+      expect(headingTop).toBeGreaterThan(logoBottom);
+    });
+  }
+
+  test('spec table keeps words whole', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto('/subpages/kmb-product-counter-uas-radar.html');
+    await settle(page);
+    const lines = await page.locator('td', { hasText: 'Communications protocol' }).evaluate((td) => {
+      const r = document.createRange();
+      r.selectNodeContents(td);
+      return new Set([...r.getClientRects()].map((c) => Math.round(c.top))).size;
+    });
+    expect(lines).toBeLessThanOrEqual(2);
+  });
+
+  for (const width of [375, 320]) {
     for (const url of ALL_PAGES) {
       test(`${url} fits a ${width}px screen`, async ({ page }) => {
         await page.setViewportSize({ width, height: 700 });
