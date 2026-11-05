@@ -5,18 +5,26 @@ jQuery(function ($) {
     // Social icon tooltips in the footer
     $('.social-network li a').tooltip();
 
-    // Start videos when they come into view, unless the visitor prefers less motion or data
+    // Play videos only while they are in view, unless the visitor prefers less motion or data
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var saveData = navigator.connection && navigator.connection.saveData;
     if ('IntersectionObserver' in window && !reduceMotion && !saveData) {
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
+                var video = entry.target;
                 if (entry.isIntersecting) {
-                    observer.unobserve(entry.target);
-                    var playing = entry.target.play();
-                    if (playing) {
-                        playing.catch(function () { /* the controls remain available */ });
+                    // Start once, and resume only if we paused it: a visitor's own pause stays paused.
+                    if (!video.dataset.started || video.dataset.pausedOffScreen) {
+                        video.dataset.started = 'true';
+                        delete video.dataset.pausedOffScreen;
+                        var playing = video.play();
+                        if (playing) {
+                            playing.catch(function () { /* the controls remain available */ });
+                        }
                     }
+                } else if (video.dataset.started && !video.paused) {
+                    video.dataset.pausedOffScreen = 'true';
+                    video.pause();
                 }
             });
         }, { rootMargin: '200px' });

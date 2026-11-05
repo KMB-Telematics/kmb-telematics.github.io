@@ -95,6 +95,44 @@ test.describe('home page video', () => {
     await expect.poll(() => urls.length).toBeGreaterThan(0);
   });
 
+  // The test browser lacks the H.264 codec, so record play and pause calls instead of decoding.
+  const trackPlayback = (page) => page.addInitScript(() => {
+    window.__calls = [];
+    window.__paused = true;
+    Object.defineProperty(HTMLMediaElement.prototype, 'paused', { get: () => window.__paused });
+    HTMLMediaElement.prototype.play = () => { window.__calls.push('play'); window.__paused = false; return Promise.resolve(); };
+    HTMLMediaElement.prototype.pause = () => { window.__calls.push('pause'); window.__paused = true; };
+  });
+  const calls = (page) => page.evaluate(() => window.__calls);
+
+  test('pauses off screen and resumes when back in view', async ({ page }) => {
+    await trackPlayback(page);
+    await page.setViewportSize({ width: 1280, height: 600 });
+    await page.goto('/index.html');
+    await settle(page);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await expect.poll(() => calls(page)).toEqual(['play']);
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await expect.poll(() => calls(page)).toEqual(['play', 'pause']);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await expect.poll(() => calls(page)).toEqual(['play', 'pause', 'play']);
+  });
+
+  test('a video the visitor paused stays paused when scrolled back to', async ({ page }) => {
+    await trackPlayback(page);
+    await page.setViewportSize({ width: 1280, height: 600 });
+    await page.goto('/index.html');
+    await settle(page);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await expect.poll(() => calls(page)).toEqual(['play']);
+    await page.evaluate(() => { window.__paused = true; }); // visitor pressed pause
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(300);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(300);
+    expect(await calls(page)).toEqual(['play']);
+  });
+
   test('does not start for visitors who prefer less motion', async ({ page }) => {
     const urls = videoRequests(page);
     await page.emulateMedia({ reducedMotion: 'reduce' });
