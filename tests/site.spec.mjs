@@ -104,6 +104,16 @@ test.describe('home page video', () => {
   });
 });
 
+test.describe('fonts and icons', () => {
+  test('load from links in the page head, not imports inside the stylesheet', async ({ page, request, baseURL }) => {
+    await page.goto('/technology.html');
+    await expect(page.locator('head link[href*="fonts.googleapis.com/css2"]')).toHaveCount(1);
+    await expect(page.locator('head link[href*="font-awesome"]')).toHaveCount(3);
+    const css = await (await request.get(`${baseURL}/assets/css/style.css`)).text();
+    expect(css).not.toMatch(/@import url\('https?:/);
+  });
+});
+
 test.describe('libraries', () => {
   test('pages run the intended jQuery and Bootstrap versions and no removed plugins', async ({ page }) => {
     await page.goto('/technology.html');

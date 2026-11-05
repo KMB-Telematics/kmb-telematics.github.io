@@ -3,10 +3,6 @@ Author URI: http://webthemez.com/
 Note: Licence under Creative Commons Attribution 3.0  
 -------------------------------------------------------*/
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&family=Play:wght@400;700&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/brands.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/solid.min.css');
 @import url('animate.css');
 
 /* Keep the site's look after the Bootstrap 3.1 to 3.4 upgrade. Placed first so the rules below still win. */
