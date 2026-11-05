@@ -438,7 +438,7 @@ test.describe('legal pages and notices', () => {
     await expect(page.locator('.legal-page a[href*="terms_maps"]')).toHaveCount(1);
     for (const name of LEGAL) {
       await page.goto(`/subpages/${name}.html`);
-      await expect(page.locator('.legal-updated')).toHaveText('Last updated: November 5, 2026');
+      await expect(page.locator('.legal-updated')).toHaveText('Last updated: November 4, 2026');
     }
     await page.goto('/subpages/kmb-product-daa-radar.html');
     await expect(page.locator('#popupModal-daa .form-privacy')).not.toContainText('follow up');
