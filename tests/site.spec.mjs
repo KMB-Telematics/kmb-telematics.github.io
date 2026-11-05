@@ -73,6 +73,37 @@ test.describe('every public page', () => {
   });
 });
 
+test.describe('home page video', () => {
+  const videoRequests = (page) => {
+    const urls = [];
+    page.on('request', (r) => { if (r.url().endsWith('.m4v')) urls.push(r.url()); });
+    return urls;
+  };
+
+  test('downloads only when scrolled into view', async ({ page }) => {
+    const urls = videoRequests(page);
+    await page.setViewportSize({ width: 1280, height: 600 });
+    await page.goto('/index.html');
+    await settle(page);
+    await page.waitForTimeout(500);
+    expect(urls).toEqual([]);
+    await expect(page.locator('video')).toHaveAttribute('poster', /video-poster/);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await expect.poll(() => urls.length).toBeGreaterThan(0);
+  });
+
+  test('does not start for visitors who prefer less motion', async ({ page }) => {
+    const urls = videoRequests(page);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/index.html');
+    await settle(page);
+    await page.locator('video').scrollIntoViewIfNeeded();
+    await page.waitForTimeout(500);
+    expect(urls).toEqual([]);
+    await expect(page.locator('video')).toHaveAttribute('controls', '');
+  });
+});
+
 test.describe('libraries', () => {
   test('pages run the intended jQuery and Bootstrap versions and no removed plugins', async ({ page }) => {
     await page.goto('/technology.html');
