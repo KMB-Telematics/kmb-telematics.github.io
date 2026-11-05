@@ -37,6 +37,10 @@ The tests also cover phone widths, accessibility (axe), search metadata and link
 
 Start from `templates/`, give the page a unique title, description, canonical URL and preview tags, and add it to `docs/sitemap.xml`.
 
+## Security reports
+
+`docs/.well-known/security.txt` tells researchers how to report issues. Renew its `Expires` date before it passes, at least once a year. The tests fail once it has expired.
+
 ## Things that are easy to break
 
 - **Form field names:** `API_FIELD_NAMES` in `docs/assets/js/formhandlers.js` defines the names the backend receives.

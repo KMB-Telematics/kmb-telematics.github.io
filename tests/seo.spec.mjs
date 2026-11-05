@@ -58,3 +58,17 @@ test('each page has a link preview with the share image', async ({ page, request
     await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
   }
 });
+
+test('security.txt is published, valid and not expired', async ({ page, request }) => {
+  const response = await request.get('/.well-known/security.txt');
+  expect(response.status()).toBe(200);
+  const text = await response.text();
+  expect(text).toContain('Contact: mailto:info@kmb.ac');
+  expect(text).toContain(`Canonical: ${BASE}/.well-known/security.txt`);
+  const contactPage = text.match(/Contact: https:\/\/www\.kmbradar\.com(\/contact\.html\?subject=\S+)/)[1];
+  await page.goto(contactPage);
+  await expect(page.locator('#subject')).toHaveValue('Report a vulnerability');
+  // If this fails, renew the Expires date in docs/.well-known/security.txt.
+  const expires = new Date(text.match(/Expires: (\S+)/)[1]);
+  expect(expires.getTime()).toBeGreaterThan(Date.now());
+});
