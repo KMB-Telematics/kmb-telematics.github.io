@@ -138,3 +138,34 @@ test.describe('contact page URL parameters', () => {
     expect(site.pageErrors).toEqual([]);
   });
 });
+
+test.describe('returning to the contact page', () => {
+  test('a restored "Others" subject still shows its field and can be sent', async ({ page, site }) => {
+    await page.goto('/contact.html');
+    await page.locator('#subject').selectOption('others');
+    await page.locator('#contact-form input[name=name]').fill('Test User');
+    await page.goto('/technology.html');
+    await page.goBack();
+    await page.waitForLoadState('load');
+    await expect(page.locator('#subject')).toHaveValue('others');
+    await expect(page.locator('#othersubject')).toBeVisible();
+    await page.locator('#contact-form input[name=name]').fill('Test User');
+    await page.locator('#contact-form input[name=email]').fill('test@example.com');
+    await page.locator('#othersubject').fill('Partnership');
+    await page.locator('#contact-form textarea[name=message]').fill('Hello');
+    await page.locator('#contact-submit').click();
+    await expect(page.locator('#contact-done')).toBeVisible();
+    expect(site.posts[0].body['From Web: Subject']).toBe('Partnership');
+    expect(site.pageErrors).toEqual([]);
+  });
+
+  test('a subject field cleared of "Others" while restoring keeps no stale field', async ({ page }) => {
+    await page.goto('/contact.html');
+    await page.locator('#subject').selectOption('others');
+    await page.locator('#othersubject').fill('Keep me');
+    await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })));
+    await expect(page.locator('#othersubject')).toHaveValue('Keep me');
+    await page.locator('#subject').selectOption('General inquiry');
+    await expect(page.locator('#othersubject')).toHaveCount(0);
+  });
+});

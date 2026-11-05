@@ -94,15 +94,20 @@ function openDocument(src) {
 /*-- Contact form --*/
 function updateOtherSubjectField(subject) {
     const container = document.getElementById('other-subject');
-    container.innerHTML = subject.value === 'others'
-        ? '<input type="text" class="form-control" name="othersubject" id="othersubject" placeholder="Please specify subject">'
-        : '';
+    const hasField = container.querySelector('#othersubject') !== null;
+    if (subject.value === 'others' && !hasField) {
+        container.innerHTML = '<input type="text" class="form-control" name="othersubject" id="othersubject" placeholder="Please specify subject">';
+    } else if (subject.value !== 'others' && hasField) {
+        container.innerHTML = '';
+    }
 }
 
 function initContactForm(form) {
     const confirmation = createConfirmation('contact-done');
     const subject = form.subject;
     subject.addEventListener('change', () => updateOtherSubjectField(subject));
+    // The browser can restore the selected subject when a visitor returns with Back.
+    window.addEventListener('pageshow', () => updateOtherSubjectField(subject));
 
     // Links can pre-select a subject, e.g. /contact.html?subject=Price%20and%20quotation
     const requested = new URLSearchParams(window.location.search).get('subject');
@@ -115,6 +120,7 @@ function initContactForm(form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         confirmation.hide();
+        updateOtherSubjectField(subject);
 
         const checks = [
             [form.name, isBlank(form.name)],
