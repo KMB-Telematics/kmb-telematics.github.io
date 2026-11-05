@@ -7,7 +7,7 @@ class CommonHeader extends HTMLElement {
             <div class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse"
+                        <button aria-label="Toggle navigation menu" class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse"
                             type="button">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -107,7 +107,7 @@ class InnerHeader extends HTMLElement {
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<h2 class="pageTitle">` + pagename + `</h2>
+						<h1 class="pageTitle">` + pagename + `</h1>
 					</div>
 				</div>
 			</div>
@@ -121,7 +121,9 @@ customElements.define('inner-header', InnerHeader);
 // Scroll UP
 class ScrollUp extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `<a href="#" class="scrollup"><i class="fa-solid fa-angle-up active"></i></a>`;
+        this.setAttribute('role', 'navigation');
+        this.setAttribute('aria-label', 'Page');
+        this.innerHTML = `<a href="#" aria-label="Back to top" class="scrollup"><i class="fa-solid fa-angle-up active"></i></a>`;
     }
 }
 customElements.define('scroll-up', ScrollUp);
@@ -136,7 +138,7 @@ class CommonFooter extends HTMLElement {
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="widget">
-                            <h5 class="widgetheading">Contact Us</h5>
+                            <h2 class="widgetheading footer-heading">Contact Us</h2>
                             <address>
                                 <strong>KMB Telematics Inc.</strong><br>
                                 <a href="https://maps.app.goo.gl/GHTCi8s6nvZasX9m6" target="_blank">1601 Connecticut Ave NW, Suite 301<br>
@@ -144,11 +146,11 @@ class CommonFooter extends HTMLElement {
                             </address>
                             <p>
                                 <i class="icon-phone"></i>
-                                <a href="#" class="cryptedphone" data-telarea="703" data-telnumber="783"
+                                <a href="#" aria-label="Call KMB Telematics" class="cryptedphone" data-telarea="703" data-telnumber="783"
                                     data-telext="3377"
                                     onclick="window.location.href = 'tel:' + this.dataset.telarea + '-' + this.dataset.telnumber + '-' + this.dataset.telext; return false;"></a></a><br>
                                 <i class="icon-envelope-alt"></i>
-                                <a href="#" class="cryptedmail" data-emailname="info" data-emaildomain="kmb"
+                                <a href="#" aria-label="Email KMB Telematics" class="cryptedmail" data-emailname="info" data-emaildomain="kmb"
                                     data-emailtld="ac"
                                     onclick="window.location.href = 'mailto:' + this.dataset.emailname + '@' + this.dataset.emaildomain + '.' + this.dataset.emailtld; return false;"></a>
                             </p>
@@ -156,7 +158,7 @@ class CommonFooter extends HTMLElement {
                     </div>
                     <div class="col-lg-3">
                         <div class="widget">
-                            <h5 class="widgetheading">Quick Links</h5>
+                            <h2 class="widgetheading footer-heading">Quick Links</h2>
                             <ul class="link-list">
                                 <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/" target="_blank">Latest Updates</a></li>
                                 <li><a href="/subpages/terms-and-conditions.html">Terms and Conditions</a></li>
@@ -172,7 +174,7 @@ class CommonFooter extends HTMLElement {
 
                     </div>
                     <div class="col-lg-3">
-                        <h5 class="widgetheading">Get KMB updates</h5>
+                        <h2 class="widgetheading footer-heading">Get KMB updates</h2>
                         <div id="subscribe-done" style="display: none">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -204,9 +206,9 @@ class CommonFooter extends HTMLElement {
                         </div>
                         <div class="col-lg-6">
                             <ul class="social-network">
-                                <li><a href="https://x.com/KmbTelematics" data-placement="top" title="Twitter"
+                                <li><a href="https://x.com/KmbTelematics" aria-label="KMB Telematics on X" data-placement="top" title="Twitter"
                                         target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/" data-placement="top"
+                                <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/" aria-label="KMB Telematics on LinkedIn" data-placement="top"
                                         title="Linkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
                             </ul>
                         </div>
@@ -233,8 +235,8 @@ class CommonDownloadForm extends HTMLElement {
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">×</button>
-                            <h1>Download Brochure </h1>
-                            <h2>Please fill in the details below to download the requested materials:</h2>
+                            <h2 class="modal-heading">Download Brochure</h2>
+                            <h3 class="modal-subheading">Please fill in the details below to download the requested materials:</h3>
                         </div>
                         <div class="modal-body">
                             <div class="column">

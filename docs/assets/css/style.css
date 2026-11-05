@@ -10,8 +10,6 @@ Note: Licence under Creative Commons Attribution 3.0
 @import url('animate.css');
 
 /* Keep the site's look after the Bootstrap 3.1 to 3.4 upgrade. Placed first so the rules below still win. */
-a { color: #428bca; }
-a:hover, a:focus { color: #2a6496; }
 .navbar-brand { height: 20px; }
 .navbar-brand > img { display: inline; }
 
@@ -2450,7 +2448,7 @@ hr.center-ball:before {
 /* Legal pages and form privacy notes */
 .legal-page { max-width: 900px; margin-bottom: 40px; }
 .legal-page h2 { margin-top: 30px; font-size: 22px; }
-.legal-updated { color: #777; }
+.legal-updated { color: #666; }
 .legal-page .styled-table { width: 100%; margin: 15px 0; }
 .form-privacy { font-size: 12px; line-height: 1.5; margin: 0 0 10px; }
 
@@ -2465,3 +2463,17 @@ common-footer { display: block; margin-top: auto; }
     .styled-table { min-width: 0; width: 100%; }
     .styled-table th, .styled-table td { padding: 1px 6px; hyphens: auto; overflow-wrap: anywhere; }
 }
+
+/* Accessibility: correct heading levels with the same appearance, and links that stand out in text */
+.flex-caption h1.flex-custom-text-line-1 { letter-spacing: normal; text-shadow: none; }
+#inner-headline h1.pageTitle { font-size: 30px; padding: 5px 0; margin-bottom: 3px; }
+h2.section-heading { padding-top: 0; font-size: 36px; }
+section.hero-text h2.section-heading { color: #fff; }
+@media only screen and (max-width: 700px) { h2.section-heading { font-size: 14pt; } }
+h2.sub-heading { padding-top: 0; font-size: 24px; }
+h2.card-heading { padding-top: 0; font-size: 18px; margin-top: 10px; }
+h2.footer-heading { padding-top: 0; font-size: 14px; margin-top: 10px; }
+.modal-content h2.modal-heading { padding-top: 0; font-size: 1.3em; }
+.modal-content h3.modal-subheading { padding-top: 20px; font-size: 1.1em; }
+main p a, main li a, main td a { text-decoration: underline; }
+.styled-table a { color: #23527c; }
