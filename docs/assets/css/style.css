@@ -2446,3 +2446,10 @@ hr.center-ball:before {
     width: 100% !important;
     height: 100% !important;
 }
+
+/* Legal pages and form privacy notes */
+.legal-page { max-width: 900px; margin-bottom: 40px; }
+.legal-page h2 { margin-top: 30px; font-size: 22px; }
+.legal-updated { color: #777; }
+.legal-page .styled-table { width: 100%; margin: 15px 0; }
+.form-privacy { font-size: 12px; line-height: 1.5; margin: 0 0 10px; }

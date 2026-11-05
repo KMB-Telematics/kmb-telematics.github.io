@@ -161,6 +161,7 @@ class CommonFooter extends HTMLElement {
                                 <li><a href="https://www.linkedin.com/company/kmb-telematics-inc/" target="_blank">Latest Updates</a></li>
                                 <li><a href="/subpages/terms-and-conditions.html">Terms and Conditions</a></li>
                                 <li><a href="/subpages/privacy-policy.html">Privacy Policy</a></li>
+                                <li><a href="/subpages/cookie-policy.html">Cookie Policy</a></li>
                                 <li><a href="/contact.html">Careers</a></li>
                                 <li><a href="/contact.html">Contact Us</a></li>
                             </ul>
@@ -171,7 +172,7 @@ class CommonFooter extends HTMLElement {
 
                     </div>
                     <div class="col-lg-3">
-                        <h5 class="widgetheading">Subscribe to our newsletter</h5>
+                        <h5 class="widgetheading">Get KMB updates</h5>
                         <div id="subscribe-done" style="display: none">
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -183,6 +184,7 @@ class CommonFooter extends HTMLElement {
                                 <div class="form-group has-feedback">
                                     <input type="email" class="form-control" name="email" placeholder="Your email">
                                 </div>
+                                <p class="form-privacy">See our <a href="/subpages/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
                                 <input type="submit" value="Subscribe" id="subscribe-submit" class="submit btn btn-default">
                             </form>
                         </div>
@@ -257,6 +259,7 @@ class CommonDownloadForm extends HTMLElement {
                                         <label for="phone-` + thisitem + `">Phone</label>
                                         <input type="text" class="form-control" id="phone-` + thisitem + `" name="phone" placeholder="">
                                     </div>
+                                    <p class="form-privacy">We use your details to provide the brochure and follow up on your interest. See our <a href="/subpages/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
                                     <input type="submit" name="submit" value="Download"
                                         class="submit btn btn-default">
                                 </form>

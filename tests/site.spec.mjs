@@ -4,7 +4,7 @@ import { test, expect, API } from './helpers.mjs';
 const NAV_PAGES = ['index', 'technology', 'applications', 'products', 'resources', 'contact'];
 const APPLICATIONS = ['counter-uas', 'drone-stationary', 'drone-hovering', 'drone-on-the-move', 'aps', 'daa-radar', 'bvlos-ops', 'part-107-waivers'];
 const PRODUCTS = ['kmb-product-counter-uas-radar', 'kmb-product-daa-radar'];
-const LEGAL = ['privacy-policy', 'terms-and-conditions'];
+const LEGAL = ['privacy-policy', 'cookie-policy', 'terms-and-conditions'];
 const ALL_PAGES = [
   ...NAV_PAGES.map((p) => `/${p}.html`),
   ...[...APPLICATIONS, ...PRODUCTS, ...LEGAL].map((p) => `/subpages/${p}.html`),
@@ -238,6 +238,12 @@ test.describe('contact form', () => {
 });
 
 test.describe('subscribe form', () => {
+  test('is labelled as KMB updates', async ({ page }) => {
+    await page.goto('/technology.html');
+    await expect(page.locator('common-footer')).toContainText('Get KMB updates');
+    await expect(page.locator('common-footer')).not.toContainText(/newsletter/i);
+  });
+
   test('rejects a bad address, then subscribes', async ({ page, site }) => {
     await page.goto('/technology.html');
     const email = page.locator('#subscribe-form input[name=email]');
@@ -263,6 +269,35 @@ test.describe('placeholder login', () => {
     expect(messages[0]).toContain("didn't match");
     expect(site.posts).toEqual([]);
     await expect(page.locator('#login-form input[name=password]')).toHaveValue('');
+  });
+});
+
+test.describe('legal pages and notices', () => {
+  for (const name of LEGAL) {
+    test(`${name} is current and points to the live site`, async ({ page, request }) => {
+      await page.goto(`/subpages/${name}.html`);
+      await expect(page.locator('.legal-page h2').first()).toBeVisible();
+      await expect(page.locator('common-header li.active')).toHaveCount(0);
+      await expect(page.locator('.legal-updated')).toContainText('Last updated');
+      const html = await (await request.get(`/subpages/${name}.html`)).text();
+      expect(html).not.toMatch(/www\.kmb\.ac|Wilson Blvd|Page Content|updated soon/);
+    });
+  }
+
+  test('footer links to all three policies', async ({ page }) => {
+    await page.goto('/technology.html');
+    for (const name of LEGAL) {
+      await expect(page.locator(`common-footer .link-list a[href="/subpages/${name}.html"]`)).toHaveCount(1);
+    }
+  });
+
+  test('every form links to the privacy policy', async ({ page }) => {
+    const link = 'a[href="/subpages/privacy-policy.html"]';
+    await page.goto('/contact.html');
+    await expect(page.locator(`#contact-form ${link}`)).toHaveCount(1);
+    await expect(page.locator(`#subscribe-form ${link}`)).toHaveCount(1);
+    await page.goto('/subpages/kmb-product-daa-radar.html');
+    await expect(page.locator(`#popupModal-daa form ${link}`)).toHaveCount(1);
   });
 });
 

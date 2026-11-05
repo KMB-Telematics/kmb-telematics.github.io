@@ -136,7 +136,7 @@ function initContactForm(form) {
 }
 /*-- /Contact form --*/
 
-/*-- Newsletter form (in the footer of every page) --*/
+/*-- "Get KMB updates" form (in the footer of every page) --*/
 function initSubscribeForm(form) {
     const confirmation = createConfirmation('subscribe-done');
 
@@ -152,7 +152,7 @@ function initSubscribeForm(form) {
         }
     });
 }
-/*-- /Newsletter form --*/
+/*-- /"Get KMB updates" form --*/
 
 /*-- Brochure download forms --*/
 function initDownloadForm(form) {
